@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>【Django跨域】一篇文章彻底解决Django跨域问题！ | 雪人的小屋</title><meta name="author" content="LonelySnowman"><meta name="copyright" content="LonelySnowman"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Django解决跨域 ⭐还有人不会用Django配置CORS？ ⭐耗时3600秒整理的资料直接拿走！一篇文章彻底解决Django跨域问题！ ⭐本文包含以下内容：Django解决跨域问题，Django解决跨域携带Cookie问题等 ⭐官方文档：Django-cors-headers ·皮皮 (pypi.org) 最全面的配置推荐大家前往官网学习   CORS，Cross-Origin Resourc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Django跨域】一篇文章彻底解决Django跨域问题！">
+<meta property="og:url" content="http://example.com/2022/12/12/Django-CORS/index.html">
+<meta property="og:site_name" content="雪人的小屋">
+<meta property="og:description" content="Django解决跨域 ⭐还有人不会用Django配置CORS？ ⭐耗时3600秒整理的资料直接拿走！一篇文章彻底解决Django跨域问题！ ⭐本文包含以下内容：Django解决跨域问题，Django解决跨域携带Cookie问题等 ⭐官方文档：Django-cors-headers ·皮皮 (pypi.org) 最全面的配置推荐大家前往官网学习   CORS，Cross-Origin Resourc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/articleImg/Django.jpg">
+<meta property="article:published_time" content="2022-12-12T05:53:12.781Z">
+<meta property="article:modified_time" content="2022-12-12T09:18:34.970Z">
+<meta property="article:author" content="LonelySnowman">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="跨域">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/articleImg/Django.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2022/12/12/Django-CORS/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【Django跨域】一篇文章彻底解决Django跨域问题！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-12 17:18:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/Head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/articleImg/Django.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">雪人的小屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【Django跨域】一篇文章彻底解决Django跨域问题！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-12T05:53:12.781Z" title="发表于 2022-12-12 13:53:12">2022-12-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-12T09:18:34.970Z" title="更新于 2022-12-12 17:18:34">2022-12-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【Django跨域】一篇文章彻底解决Django跨域问题！"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Django解决跨域"><a href="#Django解决跨域" class="headerlink" title="Django解决跨域"></a>Django解决跨域</h1><blockquote>
+<p>⭐还有人不会用Django配置CORS？</p>
+<p>⭐耗时3600秒整理的资料直接拿走！一篇文章彻底解决Django跨域问题！</p>
+<p>⭐本文包含以下内容：Django解决跨域问题，Django解决跨域携带Cookie问题等</p>
+<p>⭐官方文档：<a target="_blank" rel="noopener" href="https://pypi.org/project/django-cors-headers/">Django-cors-headers ·皮皮 (pypi.org)</a> 最全面的配置推荐大家前往官网学习</p>
+</blockquote>
+<ul>
+<li><strong>CORS，Cross-Origin Resource Sharing，是一个新的 W3C 标准，它新增的一组HTTP首部字段，允许服务端其声明哪些源站有权限访问哪些资源。换言之，它允许浏览器向声明了 CORS 的跨域服务器，发出 XMLHttpReuest 请求，从而克服 Ajax 只能同源使用的限制。在我们的django框架中就是利用CORS来解决跨域请求的问题。</strong></li>
+<li>CORS详细介绍：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">跨源资源共享（CORS） - HTTP | MDN (mozilla.org)</a></li>
+</ul>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h3><p>项目主页：<a target="_blank" rel="noopener" href="https://github.com/adamchainz/django-cors-headers">adamchainz&#x2F;django-cors-headers：Django 应用程序，用于处理跨域资源共享 （CORS） 所需的服务器标头 (github.com)</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django-cors-headers</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-修改设置"><a href="#2-修改设置" class="headerlink" title="2.修改设置"></a>2.修改设置</h3><ul>
+<li>修改Django项目文件夹下的 setting.py 文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 记得修改允许访问的IP</span></span><br><span class="line">ALLOWED_HOSTS = [<span class="string">&#x27;*&#x27;</span>] <span class="comment"># 允许全部IP访问项目</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setting.py 修改以下内容</span></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;corsheaders&#x27;</span>, <span class="comment"># 注册app corsheaders</span></span><br><span class="line">    <span class="string">&#x27;app01&#x27;</span>,<span class="comment"># 你的app</span></span><br><span class="line">]</span><br><span class="line">MIDDLEWARE = [</span><br><span class="line">    <span class="string">&#x27;django.middleware.security.SecurityMiddleware&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions.middleware.SessionMiddleware&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;corsheaders.middleware.CorsMiddleware&#x27;</span>, <span class="comment"># 加入中间键 位置必须在这里 不能在其他位置</span></span><br><span class="line">    <span class="string">&#x27;django.middleware.common.CommonMiddleware&#x27;</span>,</span><br><span class="line">    <span class="comment"># &#x27;django.middleware.csrf.CsrfViewMiddleware&#x27;, 如果你的项目没有考虑到 csrf 网络攻击,可注释掉,否则会报错没有传递 csrf cookie</span></span><br><span class="line">    <span class="string">&#x27;django.contrib.auth.middleware.AuthenticationMiddleware&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages.middleware.MessageMiddleware&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.middleware.clickjacking.XFrameOptionsMiddleware&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 setting.py 末尾添加以下设置</span></span><br><span class="line">CORS_ALLOW_CREDENTIALS = <span class="literal">True</span></span><br><span class="line">CORS_ALLOW_ALL_ORIGINS = <span class="literal">True</span></span><br><span class="line">CORS_ALLOW_HEADERS = (<span class="string">&#x27;*&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置完以上内容后Django就可用跨域访问啦！基本需求就已经解决啦！</li>
+<li>配置内容详解请向下查看学习！</li>
+</ul>
+<h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><ul>
+<li>以下内容均在 setting.py 中配置</li>
+<li>下面是一些常用的 全面的需要大家去官方文档查阅</li>
+</ul>
+<h3 id="配置允许访问的域名白名单"><a href="#配置允许访问的域名白名单" class="headerlink" title="配置允许访问的域名白名单"></a>配置允许访问的域名白名单</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许所有 域名/IP 跨域</span></span><br><span class="line">CORS_ALLOW_ALL_ORIGINS = <span class="literal">True</span></span><br><span class="line"><span class="comment"># 配置可跨域访问的 域名/IP</span></span><br><span class="line">CORS_ALLOWED_ORIGINS = [</span><br><span class="line">    <span class="string">&#x27;127.0.0.1:8000&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;localhost:8080&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;myname.com&#x27;</span>,</span><br><span class="line">]</span><br><span class="line"><span class="comment"># 使用正则表达式匹配允许访问的 域名/IP</span></span><br><span class="line">CORS_ALLOWED_ORIGIN_REGEXES = [</span><br><span class="line">    <span class="string">r&quot;^https://\w+\.example\.com$&quot;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置允许的跨域请求方式"><a href="#配置允许的跨域请求方式" class="headerlink" title="配置允许的跨域请求方式"></a>配置允许的跨域请求方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置允许的请求方式</span></span><br><span class="line">CORS_ALLOW_METHODS = [</span><br><span class="line">    <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;PUT&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;PATCH&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;DELETE&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;OPTIONS&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置允许的请求头"><a href="#配置允许的请求头" class="headerlink" title="配置允许的请求头"></a>配置允许的请求头</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CORS_ALLOW_HEADERS = [</span><br><span class="line">	<span class="string">&quot;*&quot;</span>, <span class="comment"># * 表示允许全部请求头</span></span><br><span class="line">    <span class="string">&quot;accept&quot;</span>,</span><br><span class="line">    <span class="string">&quot;accept-encoding&quot;</span>,</span><br><span class="line">    <span class="string">&quot;authorization&quot;</span>,</span><br><span class="line">    <span class="string">&quot;content-type&quot;</span>,</span><br><span class="line">    <span class="string">&quot;dnt&quot;</span>,</span><br><span class="line">    <span class="string">&quot;origin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;user-agent&quot;</span>,</span><br><span class="line">    <span class="string">&quot;x-csrftoken&quot;</span>,</span><br><span class="line">    <span class="string">&quot;x-requested-with&quot;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="允许跨域访问Cookie"><a href="#允许跨域访问Cookie" class="headerlink" title="允许跨域访问Cookie"></a>允许跨域访问Cookie</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 改为True即为可跨域设置Cookie</span></span><br><span class="line">CORS_ALLOW_CREDENTIALS = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里有一个需要注意的点</span></span><br><span class="line"><span class="comment"># chrome升级到80版本之后，cookie的SameSite属性默认值由None变为Lax</span></span><br><span class="line"><span class="comment"># 也就是说允许同站点跨域 不同站点需要修改配置为 None（需要将Secure设置为True）</span></span><br><span class="line"><span class="comment"># 需要前端与后端部署在统一服务器下才可进行跨域cookie设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 总结：需要设置 samesite = none、secure = True（代表安全环境 需要 localhost 或 HTTPS）才可跨站点设置cookie</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Cookie属性</strong></p>
+<p>key：键<br>value：值<br>max_age：多久后过期，时间为秒，默认为None，临时cookie设置即关闭浏览器就消失<br>expires：过期时间，具体时间<br>path：生效路径，默认‘&#x2F;‘<br>domain：生效的域名，你绑定的域名<br>secure：HTTPS传输时应设置为true，默认为false<br>httponly：值应用于http传输，这时JavaScript无法获取</p>
+</blockquote>
+<p><strong>SameSite属性详解</strong></p>
+<ul>
+<li>Lax<ul>
+<li>Cookies 允许与顶级导航一起发送，并将与第三方网站发起的 GET 请求一起发送。这是浏览器中的默认值。</li>
+</ul>
+</li>
+<li>Strict<ul>
+<li>Cookies 只会在第一方上下文中发送，不会与第三方网站发起的请求一起发送。</li>
+</ul>
+</li>
+<li>None<ul>
+<li>Cookie 将在所有上下文中发送，即允许跨站发送。</li>
+</ul>
+</li>
+</ul>
+<h4 id="配置的介绍"><a href="#配置的介绍" class="headerlink" title="配置的介绍"></a>配置的介绍</h4><ul>
+<li><strong>Django版本高于2.1：</strong>直接设置即可</li>
+<li><strong>如果DJango版本低于2.1：</strong>需要下载 django-cookie-samesite 再设置</li>
+<li><strong>其他详细Cookie配置内容请参考官方文档</strong>：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.1/ref/settings/#std-setting-SESSION_COOKIE_SAMESITE">配置 | Django 文档 | Django (djangoproject.com)</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下内容均在 setting.py 配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将session属性设置为 secure</span></span><br><span class="line">SESSION_COOKIE_SECURE = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置set_cookie的samesite属性</span></span><br><span class="line">SESSION_COOKIE_SAMESITE = <span class="string">&#x27;None&#x27;</span></span><br><span class="line">SESSION_COOKIE_SAMESITE = <span class="string">&#x27;Lax&#x27;</span></span><br><span class="line">SESSION_COOKIE_SAMESITE = <span class="string">&#x27;Strict&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置使用CORS的URL"><a href="#配置使用CORS的URL" class="headerlink" title="配置使用CORS的URL"></a>配置使用CORS的URL</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置Django项目中哪些URL使用CORS进行跨域</span></span><br><span class="line"><span class="comment"># 默认为 r&#x27;^.*$&#x27;，即匹配所有 URL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下案例为 /api/*** 均可进行跨域访问</span></span><br><span class="line">CORS_URLS_REGEX = <span class="string">r&quot;^/api/.*$&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>👍如果对你有帮助请给我点个赞吧</p>
+<p>❤关注我查看更多技术分享文章 Django+Vue 全栈</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">LonelySnowman</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/12/12/Django-CORS/">http://example.com/2022/12/12/Django-CORS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">雪人的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Django/">Django</a><a class="post-meta__tags" href="/tags/%E8%B7%A8%E5%9F%9F/">跨域</a></div><div class="post_share"><div class="social-share" data-image="/img/articleImg/Django.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/12/DRF/"><img class="prev-cover" src="/img/articleImg/Django.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/12/COS-PicGo/"><img class="next-cover" src="/img/randomCover/10.jfif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【图床搭建】腾讯云COS+PicGo+Typora图床搭建</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/12/DRF/" title="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！"><img class="cover" src="/img/articleImg/Django.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-12</div><div class="title">【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！</div></div></a></div><div><a href="/2022/12/12/Django-Server/" title="【Django部署】Nginx+uWsgi部署Django项目"><img class="cover" src="/img/articleImg/Django.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-12</div><div class="title">【Django部署】Nginx+uWsgi部署Django项目</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/Head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LonelySnowman</div><div class="author-info__description">希望我的分享能帮助到大家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://blog.csdn.net/lonelysnowman" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a><a class="social-icon" href="https://juejin.cn/user/550219962923015" target="_blank" title="掘金"><i class="iconfont icon-juejin"></i></a><a class="social-icon" href="https://github.com/LonelySnowman" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+canvas {
+  display: block;
+  margin: 0 auto;
+  cursor: move;
+}
+</style><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div style="display:flex;flex-direction:column;align-items:center;"><img src="/img/mao.gif" width="50" alt="mao"><strong><font color="#00dddd">大二萌新 热爱前端</font></strong><strong><font color="red">一起学习 共同进步</font></strong><strong><font color="grenn">Ctrl+D 收藏我吧</font></strong></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Django%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">Django解决跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.修改设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">详细配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8%E8%AE%BF%E9%97%AE%E7%9A%84%E5%9F%9F%E5%90%8D%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">配置允许访问的域名白名单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8%E7%9A%84%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">配置允许的跨域请求方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置允许的请求头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%81%E8%AE%B8%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AECookie"><span class="toc-number">1.2.4.</span> <span class="toc-text">允许跨域访问Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">配置的介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8CORS%E7%9A%84URL"><span class="toc-number">1.2.5.</span> <span class="toc-text">配置使用CORS的URL</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/12/DRF/" title="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！"><img src="/img/articleImg/Django.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！"/></a><div class="content"><a class="title" href="/2022/12/12/DRF/" title="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！">【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！</a><time datetime="2022-12-12T05:54:26.299Z" title="发表于 2022-12-12 13:54:26">2022-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/12/Django-CORS/" title="【Django跨域】一篇文章彻底解决Django跨域问题！"><img src="/img/articleImg/Django.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Django跨域】一篇文章彻底解决Django跨域问题！"/></a><div class="content"><a class="title" href="/2022/12/12/Django-CORS/" title="【Django跨域】一篇文章彻底解决Django跨域问题！">【Django跨域】一篇文章彻底解决Django跨域问题！</a><time datetime="2022-12-12T05:53:12.781Z" title="发表于 2022-12-12 13:53:12">2022-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/12/COS-PicGo/" title="【图床搭建】腾讯云COS+PicGo+Typora图床搭建"><img src="/img/randomCover/10.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【图床搭建】腾讯云COS+PicGo+Typora图床搭建"/></a><div class="content"><a class="title" href="/2022/12/12/COS-PicGo/" title="【图床搭建】腾讯云COS+PicGo+Typora图床搭建">【图床搭建】腾讯云COS+PicGo+Typora图床搭建</a><time datetime="2022-12-12T04:44:13.025Z" title="发表于 2022-12-12 12:44:13">2022-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/12/Vue3-Ts-Vite/" title="【Vue3+TS+Vite】使用Vite与TS构建Vue3项目"><img src="/img/articleImg/Vue.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Vue3+TS+Vite】使用Vite与TS构建Vue3项目"/></a><div class="content"><a class="title" href="/2022/12/12/Vue3-Ts-Vite/" title="【Vue3+TS+Vite】使用Vite与TS构建Vue3项目">【Vue3+TS+Vite】使用Vite与TS构建Vue3项目</a><time datetime="2022-12-12T04:41:58.260Z" title="发表于 2022-12-12 12:41:58">2022-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/12/Vue-Server/" title="【Vue部署】使用Nginx部署Vue项目"><img src="/img/articleImg/Nginx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Vue部署】使用Nginx部署Vue项目"/></a><div class="content"><a class="title" href="/2022/12/12/Vue-Server/" title="【Vue部署】使用Nginx部署Vue项目">【Vue部署】使用Nginx部署Vue项目</a><time datetime="2022-12-12T04:40:55.035Z" title="发表于 2022-12-12 12:40:55">2022-12-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/articleImg/Django.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By LonelySnowman</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"><img class="icp-icon" src="/img/icp.png"><span>备案号：晋ICP备2022007549号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'QD7nKA4PSZSoJrPudMkKmtve-gzGzoHsz',
+      appKey: '3aDTZtCPQyXqf6ssoVKZS780',
+      avatar: 'monsterid',
+      serverURLs: 'https://qd7nka4p.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

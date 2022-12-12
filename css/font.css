@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "iconfont"; /* Project id 3820993 */
+    src: url('//at.alicdn.com/t/c/font_3820993_mt1ws3mu0u.woff2?t=1670770998703') format('woff2'),
+    url('//at.alicdn.com/t/c/font_3820993_mt1ws3mu0u.woff?t=1670770998703') format('woff'),
+    url('//at.alicdn.com/t/c/font_3820993_mt1ws3mu0u.ttf?t=1670770998703') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 19px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-csdn:before {
+    content: "\e600";
+    color: #dd1700;
+}
+
+.icon-bilibili:before {
+    content: "\e609";
+    color: #52bee5;
+}
+
+.icon-juejin:before {
+    content: "\e60b";
+    color: #0e73fd;
+}
+
+.icon-wenzhang:before {
+    content: "\e67d";
+    color: red;
+}
+
+.icon-aixin:before {
+    content: "\e85c";
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.message-color {
+    color: #009688;
+}
+
+.pink {
+    color: pink;
+}
+
