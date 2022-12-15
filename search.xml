@@ -165,11 +165,11 @@
       
         <tags>
             
-            <tag> Vue </tag>
-            
             <tag> Nginx </tag>
             
             <tag> 服务器 </tag>
+            
+            <tag> Vue </tag>
             
         </tags>
       
@@ -198,9 +198,9 @@
             
             <tag> Nginx </tag>
             
-            <tag> 服务器 </tag>
-            
             <tag> uwsgi </tag>
+            
+            <tag> 服务器 </tag>
             
         </tags>
       
