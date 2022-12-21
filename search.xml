@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> ElementUI </tag>
-            
             <tag> Vue </tag>
+            
+            <tag> ElementUI </tag>
             
         </tags>
       
@@ -47,9 +47,9 @@
       
         <tags>
             
-            <tag> Django </tag>
-            
             <tag> DjangoRestFrameWork </tag>
+            
+            <tag> Django </tag>
             
         </tags>
       
@@ -165,11 +165,11 @@
       
         <tags>
             
+            <tag> Vue </tag>
+            
             <tag> Nginx </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Vue </tag>
             
         </tags>
       
@@ -198,9 +198,9 @@
             
             <tag> Nginx </tag>
             
-            <tag> uwsgi </tag>
-            
             <tag> 服务器 </tag>
+            
+            <tag> uwsgi </tag>
             
         </tags>
       
