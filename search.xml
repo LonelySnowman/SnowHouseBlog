@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>【跨域】一篇文章彻底解决跨域设置cookie问题！</title>
+      <link href="/2023/01/08/CookieCORS/"/>
+      <url>/2023/01/08/CookieCORS/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一篇文章彻底解决跨域设置cookie问题！"><a href="#一篇文章彻底解决跨域设置cookie问题！" class="headerlink" title="一篇文章彻底解决跨域设置cookie问题！"></a>一篇文章彻底解决跨域设置cookie问题！</h1><blockquote><p>大家好我是雪人~~⛄</p><p>之前做项目的时候发现后端传过来的 SetCookie 不能正常在浏览器中使用。</p><p>是因为谷歌浏览器新版本Chrome 80将Cookie的SameSite属性默认值由None变为Lax。</p><p>接下来带大家解决该问题。</p></blockquote><h2 id="原理讲解"><a href="#原理讲解" class="headerlink" title="原理讲解"></a>原理讲解</h2><ul><li>我们可以看到Cookie有以下属性</li></ul><p><img src="https://snowblogimg-1309537252.cos.ap-nanjing.myqcloud.com/img/image-20230108222229187.png" alt="image-20230108222229187"></p><blockquote><p><strong>Cookie属性</strong></p><p><strong>名称</strong>：Cookie的name。</p><p><strong>值</strong>：Cookie的value。</p><p><strong>Domain</strong>： Cookie的域。如果设成xxx.com(一级域名)，那么子域名x.xxx.com(二级域名)，都可以使用xxx.com的Cookie。</p><p><strong>Path</strong>：Cookie的路径。如果设为&#x2F;，则同域名全部路径均可使用该Cookie。如果设为&#x2F;xxx&#x2F;，则只有路径为&#x2F;xxx&#x2F;可以使用该Cookie。</p><p><strong>Expires &#x2F; Max-Age</strong>：Cookie的超时时间。如果值为时间，则在到达指定时间后Cookie失效。如果值为Session(会话)，Cookie会同Session一起失效，当整个浏览器关闭的时候Cookie失效。</p><p><strong>Size</strong>：Cookie的大小。</p><p><strong>HttpOnly</strong>：值为true时，Cookie只会在Http请求头中存在，不能通过doucment.cookie(JavaScript)访问Cookie。</p><p><strong>Secure</strong>：值为true时，只能通过https来传输Cookie。</p><p><strong>SameSite</strong>：</p><ul><li>值为Strict，完全禁止第三方Cookie，跨站时无法使用Cookie。</li><li>值为Lax，允许在跨站时使用Get请求携带Cookie，下面有一个表格介绍Lax的Cookie使用情况。</li><li>值为None，允许跨站跨域使用Cookie，前提是将Secure属性设置为true。</li></ul><p><strong>Priority</strong> ：Cookie的优先级。值为Low&#x2F;Medium&#x2F;High，当Cookie数量超出时，低优先级的Cookie会被优先清除。</p></blockquote><ul><li><p><strong>还需要了解两个概念</strong>：</p><ul><li>跨站：两个域名不属于同站（域名-主机名&#x2F;IP相同，协议相同）。</li><li>跨域：两个域名不属于同源（域名-主机名&#x2F;IP相同，端口号相同，协议相同）。</li></ul></li><li><p><strong>并且</strong>谷歌浏览器新版本Chrome 80将Cookie的SameSite属性默认值<strong>由None变为Lax</strong>。</p></li></ul><p><strong>这下就很清楚明了了，有两种解决方案</strong>：</p><ol><li>将Cookie的SameSite值设为None，Secure值改为true，并且升级为https，我们就可以跨域使用Cookie。</li><li>将Cookie的SameSite值设为Lax&#x2F;Strict，并且将前后端部署在同一台服务器下，我们就可以在同一站点使用Cookie。</li></ol><ul><li><strong>注意</strong>：<ul><li><code>如果是本地测试想要前后端对接我们就只能使用方案一了</code></li><li><code>两种方案需要先解决浏览器同源策略也就是跨域问题</code></li></ul></li></ul><h2 id="前端设置"><a href="#前端设置" class="headerlink" title="前端设置"></a>前端设置</h2><ul><li><strong>这里以vue的axios为例</strong></li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="comment">// 只需要将axios中的全局默认属性withCredentials修改为true即可</span></span><br><span class="line"><span class="comment">// 在axios发送请求时便会携带Cookie</span></span><br><span class="line">axios.<span class="property">defaults</span>.<span class="property">withCredentials</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure><h2 id="后端设置"><a href="#后端设置" class="headerlink" title="后端设置"></a>后端设置</h2><ul><li><strong>这里以Django为例</strong></li><li><strong>Django跨域问题请参考另一篇文章</strong>：<a href="https://snowhouse.space/2022/12/12/Django-CORS/">https://snowhouse.space/2022/12/12/Django-CORS/</a></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们需要修改 seeting.py 修改项目设置</span></span><br><span class="line"><span class="comment"># 记得先设置允许访问的IP</span></span><br><span class="line">ALLOWED_HOSTS = [<span class="string">&#x27;*&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 就像我们上面所说的一样有两种解决方案</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方案一</span></span><br><span class="line"><span class="comment"># 将session属性设置为 secure</span></span><br><span class="line">SESSION_COOKIE_SECURE = <span class="literal">True</span></span><br><span class="line"><span class="comment"># 设置cookie的samesite属性为None</span></span><br><span class="line">SESSION_COOKIE_SAMESITE = <span class="string">&#x27;None&#x27;</span></span><br><span class="line"><span class="comment"># 且将协议升级为https</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方案二</span></span><br><span class="line"><span class="comment"># 前后端部署在同一台服务器即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 记得先解决ajax的跨域问题</span></span><br><span class="line"><span class="comment"># 加入以下代码即可</span></span><br><span class="line">CORS_ALLOW_CREDENTIALS = <span class="literal">True</span></span><br><span class="line">CORS_ALLOW_ALL_ORIGINS = <span class="literal">True</span></span><br><span class="line">CORS_ALLOW_HEADERS = (<span class="string">&#x27;*&#x27;</span>)</span><br></pre></td></tr></table></figure><blockquote><p>是不是非常简单呢，不同的前后端框架按照原理解决即可。</p><p>如果对你有帮助的话请给我点个赞吧👍。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Django </tag>
+            
+            <tag> 跨域 </tag>
+            
+            <tag> Vue </tag>
+            
+            <tag> Cookie </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>软件工程专业大学生的一年半 | 2022年度总结</title>
       <link href="/2022/12/30/2022year/"/>
       <url>/2022/12/30/2022year/</url>
