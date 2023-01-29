@@ -1,0 +1,593 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇 | 雪人的小屋</title><meta name="author" content="LonelySnowman"><meta name="copyright" content="LonelySnowman"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇 ⛄最近要写一些npm命令发现文件读写和路径API忘记了，索性直接复习了一遍NodeJS，边学边忘真的痛苦。 ⛄本文包含以下内容：对NodeJS的基础介绍，NodeJS的内置包的简单介绍，CommonJS模块化介绍，npm包下载与发布介绍。 ⭐注：本文是对黑马程序员Node.js全套入门教程的学习笔记记录，加入了一些自己的练习改动与思考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇">
+<meta property="og:url" content="https://snowhouse.space/2023/01/29/NodeJS-01/index.html">
+<meta property="og:site_name" content="雪人的小屋">
+<meta property="og:description" content="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇 ⛄最近要写一些npm命令发现文件读写和路径API忘记了，索性直接复习了一遍NodeJS，边学边忘真的痛苦。 ⛄本文包含以下内容：对NodeJS的基础介绍，NodeJS的内置包的简单介绍，CommonJS模块化介绍，npm包下载与发布介绍。 ⭐注：本文是对黑马程序员Node.js全套入门教程的学习笔记记录，加入了一些自己的练习改动与思考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowhouse.space/img/articleImg/nodejs.jpg">
+<meta property="article:published_time" content="2023-01-29T15:34:18.867Z">
+<meta property="article:modified_time" content="2023-01-29T15:35:50.186Z">
+<meta property="article:author" content="LonelySnowman">
+<meta property="article:tag" content="NodeJS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowhouse.space/img/articleImg/nodejs.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://snowhouse.space/2023/01/29/NodeJS-01/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-29 23:35:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/Head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/articleImg/nodejs.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">雪人的小屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-29T15:34:18.867Z" title="发表于 2023-01-29 23:34:18">2023-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-29T15:35:50.186Z" title="更新于 2023-01-29 23:35:50">2023-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="【学习笔记】黑马程序员Node-js全套入门教程-基础篇"><a href="#【学习笔记】黑马程序员Node-js全套入门教程-基础篇" class="headerlink" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"></a>【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</h1><blockquote>
+<p>⛄最近要写一些npm命令发现文件读写和路径API忘记了，索性直接复习了一遍NodeJS，边学边忘真的痛苦。</p>
+<p>⛄本文包含以下内容：对NodeJS的基础介绍，NodeJS的内置包的简单介绍，CommonJS模块化介绍，npm包下载与发布介绍。</p>
+<p>⭐<strong>注</strong>：本文是对<strong>黑马程序员Node.js全套入门教程</strong>的学习笔记记录，加入了一些自己的练习改动与思考。</p>
+<p>⭐<strong>推荐大家去看原视频</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1a34y167AZ/?vd_source=f180962fb6ac13c58e2bc143f0318c2a">黑马程序员Node.js全套入门教程</a></p>
+</blockquote>
+<h2 id="初识NodeJs"><a href="#初识NodeJs" class="headerlink" title="初识NodeJs"></a>初识NodeJs</h2><h3 id="思考与认识"><a href="#思考与认识" class="headerlink" title="思考与认识"></a>思考与认识</h3><h4 id="JS为什么可以在浏览器中被执行"><a href="#JS为什么可以在浏览器中被执行" class="headerlink" title="JS为什么可以在浏览器中被执行"></a>JS为什么可以在浏览器中被执行</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">====浏览器====</span><br><span class="line">待执行的JS代码</span><br><span class="line">	↓</span><br><span class="line">JavaScript解析引擎</span><br><span class="line">====浏览器====</span><br></pre></td></tr></table></figure>
+
+<p>浏览器中含有JavaScript解析引擎负责解析JS代码</p>
+<ul>
+<li>不同的浏览器使用不同的JavaScript解析引擎：<ul>
+<li>Chrome &#x3D;&gt; V8</li>
+<li>Firefox &#x3D;&gt; OdinMonkey（奥丁猴）</li>
+<li>Safri &#x3D;&gt; JSCore</li>
+<li>IE浏览器 &#x3D;&gt; Chakra（查克拉）</li>
+<li>等…</li>
+</ul>
+</li>
+</ul>
+<p>Chrome浏览器的V8解析引擎性能最好</p>
+<h4 id="为什么JavaScript可以操作DOM和BOM"><a href="#为什么JavaScript可以操作DOM和BOM" class="headerlink" title="为什么JavaScript可以操作DOM和BOM"></a>为什么JavaScript可以操作DOM和BOM</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">====浏览器====</span><br><span class="line">DOMAPI BOMAPI AjaxAPI</span><br><span class="line">		↓</span><br><span class="line">待执行的JS代码（调用WebAPI）</span><br><span class="line">		↓</span><br><span class="line">JavaScript解析引擎</span><br></pre></td></tr></table></figure>
+
+<p>每个浏览器都内置了DOM、BOM这样的API函数，因此，浏览器中的JavaScript才可以调用它们。</p>
+<h4 id="浏览器中的JavaScript运行环境"><a href="#浏览器中的JavaScript运行环境" class="headerlink" title="浏览器中的JavaScript运行环境"></a>浏览器中的JavaScript运行环境</h4><ul>
+<li><strong>运行环境</strong>是指<strong>代码正常运行所需的必要环境</strong>。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">====Chrome浏览器运行环境====</span><br><span class="line">V8引擎 内置API</span><br><span class="line">	↑	↓</span><br><span class="line">待执行的JavaScript代码</span><br><span class="line">====Chrome浏览器运行环境====</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>V8引擎负责解析和执行JavaScript 代码。</li>
+<li>内置API是由运行环境提供的特殊接口，只能在所属的运行环境中被调用。</li>
+</ol>
+<h4 id="JavaScript能否做后端开发"><a href="#JavaScript能否做后端开发" class="headerlink" title="JavaScript能否做后端开发"></a>JavaScript能否做后端开发</h4><ul>
+<li>JS可以在浏览器中运行，我们需要通过Node.js让JS代码在服务端运行</li>
+</ul>
+<h3 id="Node-js-简介"><a href="#Node-js-简介" class="headerlink" title="Node.js 简介"></a>Node.js 简介</h3><h4 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h4><ul>
+<li>Node.js 是一个基于Chrome V8引擎的JavaScript运行环境。</li>
+<li>官网地址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js (nodejs.org)</a></li>
+</ul>
+<h4 id="Node-js中的JavaScript运行环境"><a href="#Node-js中的JavaScript运行环境" class="headerlink" title="Node.js中的JavaScript运行环境"></a>Node.js中的JavaScript运行环境</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">====Node.js运行环境====</span><br><span class="line">V8引擎 内置API（fs path http JS内置对象等）</span><br><span class="line">	↑	↓</span><br><span class="line">待执行的JavaScript代码</span><br><span class="line">====Chrome浏览器运行环境====</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>浏览器是JavaScript 的前端运行环境。</li>
+<li>Node.js 是JavaScript的后端运行环境。</li>
+<li>Node.js 中无法调用DOM和BOM等浏览器内置API。</li>
+</ul>
+<h4 id="Node-js-可以做什么"><a href="#Node-js-可以做什么" class="headerlink" title="Node.js 可以做什么"></a>Node.js 可以做什么</h4><p>Node,js作为一个JavaScript 的运行环境，仅仅提供了基础的功能和API。然而，基于Node.,js提供的这些基础能，很多强大的工具和框架如雨后春笋，层出不穷，所以学会了Node.js，可以让前端程序员胜任更多的工作和岗位。</p>
+<ul>
+<li>基于 <a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/">Express 框架 (opens new window)</a>，可以快速构建 Web 应用</li>
+<li>基于 <a target="_blank" rel="noopener" href="https://electronjs.org/">Electron 框架 (opens new window)</a>，可以构建跨平台的桌面应用</li>
+<li>基于 <a target="_blank" rel="noopener" href="http://restify.com/">restify 框架 (opens new window)</a>，可以快速构建 API 接口项目</li>
+<li>读写和操作数据库、创建实用的命令行工具辅助前端开发</li>
+<li>等…</li>
+</ul>
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>如果希望通过Node.,js 来运行Javascript 代码，则必须在计算机上安装Node.js环境才行。</p>
+<ul>
+<li>前往官网下载安装：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">节点.js (nodejs.org)</a></li>
+</ul>
+<ol>
+<li><p>区分<strong>LTS</strong>版本和<strong>Current</strong>版本的不同</p>
+<ul>
+<li>LTS为长期稳定版，对于追求稳定性的企业级项目来说，推荐安装LTS版本的Node.js。</li>
+<li>Current 为新特性尝鲜版，对热衷于尝试新特性的用户来说，推荐安装Current 版本的Node.js。但是，Current 版本中可能存在隐藏的Bug 或安全性漏洞，因此不推荐在企业级项目中使用Current版本的 Node.js</li>
+</ul>
+</li>
+<li><p>查看已安装的Node.js版本号</p>
+<ul>
+<li>打开终端输入<code>node -v</code>，即可查看node.js版本号</li>
+</ul>
+</li>
+<li><p>什么是终端</p>
+<ul>
+<li>终端(英文: Terminal)是专门为开发人员设计的，用于实现人机交互的一种方式。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>使用<code>node &lt;js文件名&gt;</code>运行js文件</li>
+</ul>
+<h2 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h2><h3 id="fs文件系统模块"><a href="#fs文件系统模块" class="headerlink" title="fs文件系统模块"></a>fs文件系统模块</h3><ul>
+<li>fs 模块是Node.js 官方提供的、用来操作文件的模块。它提供了一系列的方法和属性，用来满足用户对文件的操作需求。</li>
+</ul>
+<h4 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Nodejs内置模块 无需额外安装</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="读取文件内容"><a href="#读取文件内容" class="headerlink" title="读取文件内容"></a>读取文件内容</h4><ul>
+<li>使用fs.readFile()方法，可以读取指定文件中的内容</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(path[, options], callback)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数解释：<ol>
+<li>path：必选参数，字符串，表示文件的路径。</li>
+<li>options：可选参数，表示以什么编码格式来读取文件。</li>
+<li>callback：必选参数，文件读取完成后，通过回调函数拿到读取的结果，该函数会传入两个参数。<ul>
+<li>err：文件读取错误时发生的报错</li>
+<li>dataStr：文件内容</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>示例代码</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./test.text&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="keyword">function</span> (<span class="params">err, dataStr</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果读取成功，则err为null</span></span><br><span class="line">    <span class="comment">// 如果读取失败，err的值为错误对象</span></span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;+++++++++&#x27;</span>)</span><br><span class="line">    <span class="comment">// 打印成功的结果</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(dataStr)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="写入文件内容"><a href="#写入文件内容" class="headerlink" title="写入文件内容"></a>写入文件内容</h4><ul>
+<li>使用fs.writeFile0方法，可以向指定的文件中写入内容，语法格式如下</li>
+<li>该方法只能创建文件，不能创建目录</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">writeFile</span>(file, data[, options], callback)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数解释：<ol>
+<li>file：必选参数，需要指定一个文件路径的字符串，表示文件的存放路径。</li>
+<li>data：必选参数，表示要写入的内容。</li>
+<li>options：可选参数，表示以什么格式写入文件内容，默认值是utf8。</li>
+<li>callback：必选参数，文件写入完成后的回调函数，该函数会传入一个参数。<ul>
+<li>err：文件写入错误时发生的报错</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>示例代码</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">writeFile</span>(<span class="string">&#x27;./write.text&#x27;</span>, <span class="string">&#x27;Hello FS Module!&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果写入成功，则err为null</span></span><br><span class="line">    <span class="comment">// 如果写入失败，err的值为错误对象</span></span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理路径问题"><a href="#处理路径问题" class="headerlink" title="处理路径问题"></a>处理路径问题</h4><ul>
+<li>在使用fs 模块操作文件时，如果提供的操作路径是以.&#x2F;或..&#x2F;开头的相对路径时，很容易出现路径动态拼接错误的问题。</li>
+<li>原因：代码在运行的时候，会队执行node命令时所处的目录，动态拼接出被操作文件的完整路径。（相对于用户所在目录，而不是相对于文件目录）</li>
+</ul>
+<p><strong>__dirname</strong></p>
+<ul>
+<li>__dirname表示当前文件所处的目录，更改后可解决路径问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(__dirname + <span class="string">&#x27;/test.text&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="keyword">function</span> (<span class="params">err, dataStr</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">writeFile</span>(__dirname + <span class="string">&#x27;/write.text&#x27;</span>, <span class="string">&#x27;Hello FS Module!&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="path路径模块"><a href="#path路径模块" class="headerlink" title="path路径模块"></a>path路径模块</h3><ul>
+<li>path模块是Node.js官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</li>
+</ul>
+<h4 id="导入模块-1"><a href="#导入模块-1" class="headerlink" title="导入模块"></a>导入模块</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Nodejs内置模块 无需额外安装</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="路径拼接"><a href="#路径拼接" class="headerlink" title="路径拼接"></a>路径拼接</h4><ul>
+<li>使用path.join(方法，可以把多个路径片段拼接为完整的路径字符串，语法格式如下</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">join</span>([...path])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数解释：<ol>
+<li>path：路径片段的序列（）</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pathStr = path.<span class="title function_">join</span>(<span class="string">&#x27;/a&#x27;</span>, <span class="string">&#x27;/b/c&#x27;</span>, <span class="string">&#x27;../&#x27;</span>, <span class="string">&#x27;./d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pathStr) <span class="comment">// \a\b\d\e</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pathStr2 = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;./files/1.text&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pathStr2) <span class="comment">// 将相对路径转化为绝对路径</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>与 __dirname 使用字符串加法的不同<ul>
+<li>如果使用字符串加法<code>__dirname + &#39;./a&#39;</code>会在路径中多出一个点（.）使用path.join可以解决此问题</li>
+</ul>
+</li>
+</ul>
+<h4 id="获取路径中的文件名"><a href="#获取路径中的文件名" class="headerlink" title="获取路径中的文件名"></a>获取路径中的文件名</h4><ul>
+<li>使用path.basename()方法，可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名，语法格式如下</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">basename</span>(path[, ext])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数解释：<ol>
+<li>path：必选参数，表示一个路径的字符串</li>
+<li>ext：可选参数，表示文件扩展名</li>
+</ol>
+</li>
+</ul>
+<p><strong>使用示例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fpath = <span class="string">&#x27;/a/b/c/index.html&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fullName = path.<span class="title function_">basename</span>(fpath)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fullName) <span class="comment">// index.html</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nameWithoutExt = path.<span class="title function_">basename</span>(fpath, <span class="string">&#x27;.html&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(nameWithoutExt) <span class="comment">// index</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取路径中的文件扩展名"><a href="#获取路径中的文件扩展名" class="headerlink" title="获取路径中的文件扩展名"></a>获取路径中的文件扩展名</h4><ul>
+<li>使用path.extname)方法，可以获取路径中的扩展名部分</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.<span class="title function_">extname</span>(path)</span><br></pre></td></tr></table></figure>
+
+<p>参数解释：</p>
+<ol>
+<li>path：必选参数，表示一个路径的字符串</li>
+</ol>
+<p><strong>使用示例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fpath = <span class="string">&#x27;/a/b/c/index.html&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fext = path.<span class="title function_">extname</span>(fpath)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fext) <span class="comment">// .html</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="http模块"><a href="#http模块" class="headerlink" title="http模块"></a>http模块</h3><ul>
+<li><p>http模块是Node.js 官方提供的、用来创建 web服务器的模块。通过 http模块提供的 http.createServer()方法，就能方便的把一台普通的电脑，变成一台Web服务器，从而对外提供Web资源服务。</p>
+</li>
+<li><p>服务器和普通电脑的区别在于，服务器上安装了web服务器软件，例如:IIS、Apache等。通过安装这些服务器软件,就能把一台普通的电脑变成一台web服务器。</p>
+</li>
+<li><p>在Node.js 中，我们不需要使用IIS、Apache等这些第三方web服务器软件。因为我们可以基于Node,js提供的http模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供web服务。</p>
+</li>
+<li><p><strong>基本四步</strong></p>
+<ol>
+<li>导入http模块</li>
+<li>创建web服务器实例</li>
+<li>为服务器实例绑定request事件，监听客户端请求</li>
+<li>启动服务器</li>
+</ol>
+</li>
+</ul>
+<h4 id="导入模块-2"><a href="#导入模块-2" class="headerlink" title="导入模块"></a>导入模块</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建web服务器实例"><a href="#创建web服务器实例" class="headerlink" title="创建web服务器实例"></a>创建web服务器实例</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> server = http.<span class="title function_">createServer</span>()</span><br></pre></td></tr></table></figure>
+
+<h4 id="为服务器绑定request事件"><a href="#为服务器绑定request事件" class="headerlink" title="为服务器绑定request事件"></a>为服务器绑定request事件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server.<span class="title function_">on</span>(<span class="string">&#x27;request&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Someone visit our web server.&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> url = req.<span class="property">url</span> <span class="comment">// 请求地址</span></span><br><span class="line">    <span class="keyword">const</span> method = req.<span class="property">method</span> <span class="comment">// 请求url</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据路径判断返回不同内容</span></span><br><span class="line">    <span class="keyword">let</span> content = <span class="string">&#x27;&lt;h1&gt;404 Not found!&lt;/h1&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span>(url === <span class="string">&#x27;/&#x27;</span> || url === <span class="string">&#x27;/index.html&#x27;</span>) &#123;</span><br><span class="line">        content = <span class="string">&#x27;&lt;h1&gt;首页&lt;/h1&gt;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/html; charset=utf-8&#x27;</span>) <span class="comment">// 设置响应头</span></span><br><span class="line">    res.<span class="title function_">end</span>(content) <span class="comment">// 向客户端响应内容</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.<span class="title function_">listen</span>(<span class="number">80</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;http server running at http://127.0.0.1&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><h3 id="模块分类"><a href="#模块分类" class="headerlink" title="模块分类"></a>模块分类</h3><ul>
+<li>Node.js 中根据模块来源的不同，将模块分为了3大类，分别是<ul>
+<li>内置模块(内置模块是由Node.js官方提供的，例如fs、path、http等)</li>
+<li>自定义模块（用户创建的每个.js文件，都是自定义模块)</li>
+<li>第三方模块(由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前<br>需要先下载)</li>
+</ul>
+</li>
+</ul>
+<h3 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载内置fs模块</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载用户自定义模块</span></span><br><span class="line"><span class="keyword">const</span> custom - <span class="built_in">require</span>(<span class="string">&#x27;./custom.js&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载第三方模块</span></span><br><span class="line"><span class="keyword">const</span> moment - <span class="built_in">require</span>(<span class="string">&#x27;moment&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>注意</strong>：使用require方法加载其它模块时，会执行被加载模块中的代码。</li>
+</ul>
+<h3 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h3><ul>
+<li>和函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域。</li>
+<li>该作用域防止了全局变量污染的问题</li>
+</ul>
+<h3 id="module对象"><a href="#module对象" class="headerlink" title="module对象"></a>module对象</h3><ul>
+<li>在每个.js自定义模块中都有一个module对象，它里面存储了和当前模块有关的信息<ul>
+<li>id，path，exports，parent，filename等…</li>
+</ul>
+</li>
+</ul>
+<h4 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h4><ul>
+<li>在自定义模块中，可以使用module.exports对象，将模块内的成员共享出去，供外界使用。</li>
+<li>外界用require()方法导入自定义模块时，得到的就是 module.exports所指向的对象。</li>
+</ul>
+<p><strong>代码示例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// moduleA.js</span></span><br><span class="line"><span class="comment">// 导出变量</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">username</span> = <span class="string">&#x27;zs&#x27;</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hello!&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="comment">// 导入并使用变量</span></span><br><span class="line"><span class="keyword">const</span> moduleA = <span class="built_in">require</span>(<span class="string">&#x27;./moduleA.js&#x27;</span>)</span><br><span class="line">moduleA.<span class="title function_">sayHello</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="exports对象"><a href="#exports对象" class="headerlink" title="exports对象"></a>exports对象</h3><ul>
+<li>由于module.exports单词写起来比较复杂，为了简化向外共享成员的代码，Node提供了exports对象。默认情况下，exports和module.exports 指向同一个对象。最终共享的结果，还是以module.exports指向的对象为准。</li>
+<li>时刻谨记，require)模块时，得到的永远是 module.exports指向的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">module</span>.<span class="property">exports</span>) <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">exports</span>) <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">module</span>.<span class="property">exports</span> === <span class="built_in">exports</span>) <span class="comment">// true </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h3><p>Node.js遵循了CommonJS模块化规范，CommonJS规定了模块的特性和各模块之间如何相互依赖。</p>
+<ul>
+<li>CommonJS规定：<ol>
+<li>每个模块内部,module变量代表当前模块。</li>
+<li>module变量是一个对象，它的exports属性(即module.exports)是对外的接口。</li>
+<li>加载某个模块，其实是加载该模块的 module.exports属性。require)方法用于加载模块。</li>
+</ol>
+</li>
+</ul>
+<h3 id="模块加载机制"><a href="#模块加载机制" class="headerlink" title="模块加载机制"></a>模块加载机制</h3><p>模块第一次加载后会被缓存，即多次调用 <code>require()</code> 不会导致模块的代码被执行多次，提高模块加载效率。</p>
+<h4 id="内置模块加载"><a href="#内置模块加载" class="headerlink" title="内置模块加载"></a>内置模块加载</h4><p>内置模块加载优先级最高。</p>
+<h4 id="自定义模块加载"><a href="#自定义模块加载" class="headerlink" title="自定义模块加载"></a>自定义模块加载</h4><p>加载自定义模块时，路径要以 <code>./</code> 或 <code>../</code> 开头，否则会作为内置模块或第三方模块加载。</p>
+<p>导入自定义模块时，若省略文件扩展名，则 Node.js 会按顺序尝试加载文件：</p>
+<ul>
+<li>按确切的文件名加载</li>
+<li>补全 <code>.js</code> 扩展名加载</li>
+<li>补全 <code>.json</code> 扩展名加载</li>
+<li>补全 <code>.node</code> 扩展名加载</li>
+<li>报错</li>
+</ul>
+<h4 id="第三方模块加载"><a href="#第三方模块加载" class="headerlink" title="第三方模块加载"></a>第三方模块加载</h4><ul>
+<li>若导入第三方模块， Node.js 会从<strong>当前模块的父目录</strong>开始，尝试从 <code>/node_modules</code> 文件夹中加载第三方模块。</li>
+<li>如果没有找到对应的第三方模块，则移动到再<strong>上一层父目录</strong>中，进行加载，直到<strong>文件系统的根目录</strong>。</li>
+</ul>
+<p>例如，假设在 <code>C:\Users\bruce\project\foo.js</code> 文件里调用了 <code>require(&#39;tools&#39;)</code>，则 Node.js 会按以下顺序查找：</p>
+<ul>
+<li><code>C:\Users\bruce\project\node_modules\tools</code></li>
+<li><code>C:\Users\bruce\node_modules\tools</code></li>
+<li><code>C:\Users\node_modules\tools</code></li>
+<li><code>C:\node_modules\tools</code></li>
+</ul>
+<h4 id="目录作为模块加载"><a href="#目录作为模块加载" class="headerlink" title="目录作为模块加载"></a>目录作为模块加载</h4><p>当把目录作为模块标识符进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找 <code>package.json</code> 的文件，并寻找 <code>main</code> 属性，作为 <code>require()</code> 加载的入口</li>
+<li>如果没有 <code>package.json</code> 文件，或者 <code>main</code> 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 <code>index.js</code> 文件。</li>
+<li>若失败则报错</li>
+</ul>
+<h2 id="npm与包"><a href="#npm与包" class="headerlink" title="npm与包"></a>npm与包</h2><h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><ul>
+<li>概念<ul>
+<li>Node.js 中的第三方模块又叫做包。</li>
+<li>就像电脑和计算机指的是相同的东西，第三方模块和包指的是同一个概念，只不过叫法不同。</li>
+</ul>
+</li>
+<li>来源<ul>
+<li>不同于Node.js 中的内置模块与自定义模块，包是由第三方个人或团队开发出来的，免费供所有人使用。</li>
+<li>Node.js 中的包都是免费且开源的，不需要付费即可免费下载使用。</li>
+</ul>
+</li>
+<li>为什么需要包<ul>
+<li>由于Node.js 的内置模块仅提供了一些底层的API，导致在基于内置模块进行项目开发的时，效率很低。</li>
+<li>包是基于内置模块封装出来的，提供了更高级、更方便的API，极大的提高了开发效率。</li>
+<li>包和内置模块之间的关系，类似于jQuery和浏览器内置API之间的关系。</li>
+</ul>
+</li>
+<li>从哪里下载包<ul>
+<li>国外有一家IT公司，叫做npm, Inc.这家公司旗下有一个非常著名的网站: <a target="_blank" rel="noopener" href="https://www.npmjs.com/%EF%BC%8C%E5%AE%83%E6%98%AF%E5%85%A8%E7%90%83%E6%9C%80%E5%A4%A7%E7%9A%84%E5%8C%85%E5%85%B1%E4%BA%AB%E5%B9%B3%E5%8F%B0%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BB%8E%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E4%B8%8A%E6%90%9C%E7%B4%A2%E5%88%B0%E4%BB%BB%E4%BD%95%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E5%8C%85%EF%BC%8C%E5%8F%AA%E8%A6%81%E4%BD%A0%E6%9C%89%E8%B6%B3%E5%A4%9F%E7%9A%84%E8%80%90%E5%BF%83">https://www.npmjs.com/，它是全球最大的包共享平台，你可以从这个网站上搜索到任何你需要的包，只要你有足够的耐心</a>!</li>
+<li>npm, Inc.公司提供了一个地址为<a target="_blank" rel="noopener" href="https://registry.npmjs.org/%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%9D%A5%E5%AF%B9%E5%A4%96%E5%85%B1%E4%BA%AB%E6%89%80%E6%9C%89%E7%9A%84%E5%8C%85%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BB%8E%E8%BF%99%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%B8%8B%E8%BD%BD%E8%87%AA%E5%B7%B1%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E5%8C%85%E3%80%82">https://registry.npmjs.org/的服务器，来对外共享所有的包，我们可以从这个服务器上下载自己所需要的包。</a></li>
+</ul>
+</li>
+<li>如何下载包<ul>
+<li>npm, Inc.公司提供了一个包管理工具，我们可以使用这个包管理工具，从<a target="_blank" rel="noopener" href="https://registry.npmjs.org/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8A%8A%E9%9C%80%E8%A6%81%E7%9A%84%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E3%80%82">https://registry.npmjs.org/服务器把需要的包下载到本地使用。</a><br>这个包管理工具的名字叫做Node Package Manager (<strong>简称npm包管理工具</strong>)，这个包管理工具随着Node.js的安装包一起被安装到了用户的电脑上。</li>
+</ul>
+</li>
+</ul>
+<h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><ul>
+<li>npm是Nodejs官方的包管理工具。</li>
+<li>初次装包完成后，在项目文件夹下多一个叫做node_ modules的文件夹和package-lockjson的配置文件。</li>
+<li>node_modules 文件夹用来存放所有已安装到项目中的包。require()导入第三方包时，就是从这个目录中查找并加载包。</li>
+<li>package-lockjson 配置文件用来记录node modules目录下的每一个包的下载信息，例如包的名字、版本号、下载地址等。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化npm配置文件</span></span><br><span class="line"><span class="comment"># -y表示使用配置默认选项</span></span><br><span class="line"><span class="comment"># 执行后出现 package.json 文件</span></span><br><span class="line">npm init -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载包</span></span><br><span class="line">npm install &lt;包名称&gt;</span><br><span class="line"><span class="comment"># 删除包</span></span><br><span class="line">npm uninstall &lt;包名称&gt;</span><br><span class="line"><span class="comment"># 切换镜像源加速下载</span></span><br><span class="line">npm config <span class="built_in">set</span> registry=https://registry.npm.taobao.org/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在执行npm install命令时，如果提供了-g参数，则会把包安装为全局包。</span></span><br><span class="line"><span class="comment"># 全局包会被安装到C:\Users\用户目录VAppData\RoamingInpm\node_modules目录下。</span></span><br><span class="line">npm install &lt;包名称&gt; -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上述命令只能在英文的目录下成功运行!所以，项目文件夹的名称一定要使用英文命名，不要使用中文，不能出现空格。</li>
+<li>运行npm install命令安装包的时候，npm包管理工具会自动把包的名称和版本号，记录到package.json 中。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// packge.json</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;nodeNpm&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;keywords&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ISC&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h3><ul>
+<li>新建itheima-tools文件夹，作为包的根目录</li>
+<li>在itheima-tools文件夹中，新建如下三个文件:<ul>
+<li>package.json(包管理配置文件)</li>
+<li>index.js(包的入口文件)</li>
+<li>README.md(包的说明文档)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// packge.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;myTool&quot;</span>, <span class="comment">// 包名称</span></span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>, <span class="comment">// 包版本</span></span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 包的描述</span></span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>, <span class="comment">// 包的入口文件</span></span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123; <span class="comment">// 包的可执行指令</span></span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;keywords&quot;</span>: [], <span class="comment">// 搜索关键字，使用那些关键字可以搜索到该作者</span></span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 包的作者</span></span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span> <span class="comment">// 包遵循的开源协议</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">export</span> = &#123;</span><br><span class="line">    <span class="title function_">add</span>(<span class="params">a, b</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>包根目录中的README.md文件，是包的使用说明文档。通过它，我们可以事先把包的使用说明，以 markdown的格式写出来，方便用户参考。</li>
+<li>README文件中具体写什么内容，没有强制性的要求;只要能够清晰地把包的作用、用法、注意事项等描述清楚即可。我们所创建的</li>
+<li>这个包的 README.md文档中，会包含以下6项内容:<ul>
+<li>安装方式、导入方式、格式化时间、转义HTML中的特殊字符、还原HTML中的特殊字符、开源协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="npm发布"><a href="#npm发布" class="headerlink" title="npm发布"></a>npm发布</h3><h4 id="注册npm账号"><a href="#注册npm账号" class="headerlink" title="注册npm账号"></a>注册npm账号</h4><ul>
+<li>访问<a target="_blank" rel="noopener" href="https://www.npmjs.com/%E7%BD%91%E7%AB%99%EF%BC%8C%E7%82%B9%E5%87%BB">https://www.npmjs.com/网站，点击</a> sign up按钮，进入注册用户界面</li>
+<li>填写账号相关的信息:Full Name、Public Email、Username、Password</li>
+<li>点击Create an Account按钮，注册账号</li>
+<li>登录邮箱,点击验证链接，进行账号的验证</li>
+</ul>
+<h4 id="登录npm账号"><a href="#登录npm账号" class="headerlink" title="登录npm账号"></a>登录npm账号</h4><ul>
+<li>npm账号注册完成后，可以在终端中执行npm login命令，依次输入用户名、密码、邮箱后，即可登录成功。</li>
+<li><strong>注意</strong>：在运行npm login命令之前，必须先把下包的服务器地址切换为npm的官方服务器。否则会导致发布包失败!</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入账号密码后即可成功登录</span></span><br><span class="line">npm login</span><br></pre></td></tr></table></figure>
+
+<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将包发布在npm上</span></span><br><span class="line">npm publish</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除发布的包</span></span><br><span class="line">npm unpublish &lt;包名&gt; --force</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>npm unpublish命令只能删除72小时以内发布的包。</li>
+<li>npm unpublish 删除的包，在24小时内不允许重复发布发布包的时候要慎重。</li>
+<li>尽量不要往npm上发布没有意义的包!</li>
+</ul>
+<blockquote>
+<p>⛄以上便是基础篇的全部内容了，学习后能让你对NodeJS有一个大致的了解。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://snowhouse.space">LonelySnowman</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://snowhouse.space/2023/01/29/NodeJS-01/">https://snowhouse.space/2023/01/29/NodeJS-01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://snowhouse.space" target="_blank">雪人的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NodeJS/">NodeJS</a></div><div class="post_share"><div class="social-share" data-image="/img/articleImg/nodejs.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/01/22/diary/2023-1-22/"><img class="next-cover" src="/img/randomCover/8.jfif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【雪人日记】2023年的除夕夜</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/Head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LonelySnowman</div><div class="author-info__description">希望我的分享能帮助到大家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LonelySnowman"><i class="fab fa-github"></i><span>Follow My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://blog.csdn.net/lonelysnowman" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a><a class="social-icon" href="https://juejin.cn/user/550219962923015" target="_blank" title="掘金"><i class="iconfont icon-juejin"></i></a><a class="social-icon" href="https://github.com/LonelySnowman" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+canvas {
+  display: block;
+  margin: 0 auto;
+  cursor: move;
+}
+</style><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div style="display:flex;flex-direction:column;align-items:center;"><img src="/img/mao.gif" width="50" alt="mao"><strong><font color="#00dddd">大二萌新 热爱前端</font></strong><strong><font color="red">一起学习 共同进步</font></strong><strong><font color="grenn">Ctrl+D 收藏我吧</font></strong></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98Node-js%E5%85%A8%E5%A5%97%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E8%AF%86NodeJs"><span class="toc-number">1.1.</span> <span class="toc-text">初识NodeJs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E4%B8%8E%E8%AE%A4%E8%AF%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">思考与认识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JS%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E8%A2%AB%E6%89%A7%E8%A1%8C"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">JS为什么可以在浏览器中被执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88JavaScript%E5%8F%AF%E4%BB%A5%E6%93%8D%E4%BD%9CDOM%E5%92%8CBOM"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">为什么JavaScript可以操作DOM和BOM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84JavaScript%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">浏览器中的JavaScript运行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript%E8%83%BD%E5%90%A6%E5%81%9A%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">JavaScript能否做后端开发</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">Node.js 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNode-js"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">什么是Node.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-js%E4%B8%AD%E7%9A%84JavaScript%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Node.js中的JavaScript运行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-js-%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Node.js 可以做什么</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Node-js"><span class="toc-number">1.1.3.</span> <span class="toc-text">安装Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.</span> <span class="toc-text">常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.1.</span> <span class="toc-text">fs文件系统模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">导入模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">读取文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">写入文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">处理路径问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#path%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.2.</span> <span class="toc-text">path路径模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97-1"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">导入模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">路径拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">获取路径中的文件名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">获取路径中的文件扩展名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.3.</span> <span class="toc-text">http模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97-2"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">导入模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">创建web服务器实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%91%E5%AE%9Arequest%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">为服务器绑定request事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">启动服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.1.</span> <span class="toc-text">模块分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.2.</span> <span class="toc-text">加载模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.3.3.</span> <span class="toc-text">模块作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#module%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.4.</span> <span class="toc-text">module对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#module-exports"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">module.exports</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exports%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.5.</span> <span class="toc-text">exports对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJS%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.6.</span> <span class="toc-text">CommonJS规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.7.</span> <span class="toc-text">模块加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">内置模块加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.7.2.</span> <span class="toc-text">自定义模块加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.7.3.</span> <span class="toc-text">第三方模块加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E4%BD%9C%E4%B8%BA%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.7.4.</span> <span class="toc-text">目录作为模块加载</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm%E4%B8%8E%E5%8C%85"><span class="toc-number">1.4.</span> <span class="toc-text">npm与包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85"><span class="toc-number">1.4.1.</span> <span class="toc-text">包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm"><span class="toc-number">1.4.2.</span> <span class="toc-text">npm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%8C%85"><span class="toc-number">1.4.3.</span> <span class="toc-text">发布包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm%E5%8F%91%E5%B8%83"><span class="toc-number">1.4.4.</span> <span class="toc-text">npm发布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%86%8Cnpm%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">注册npm账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%99%BB%E5%BD%95npm%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">登录npm账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E5%B8%83"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">发布</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"><img src="/img/articleImg/nodejs.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"/></a><div class="content"><a class="title" href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</a><time datetime="2023-01-29T15:34:18.867Z" title="发表于 2023-01-29 23:34:18">2023-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜"><img src="/img/randomCover/8.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【雪人日记】2023年的除夕夜"/></a><div class="content"><a class="title" href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜">【雪人日记】2023年的除夕夜</a><time datetime="2023-01-21T17:15:41.798Z" title="发表于 2023-01-22 01:15:41">2023-01-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"><img src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"/></a><div class="content"><a class="title" href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇">【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇</a><time datetime="2023-01-18T04:23:53.149Z" title="发表于 2023-01-18 12:23:53">2023-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"><img src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"/></a><div class="content"><a class="title" href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇">【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇</a><time datetime="2023-01-17T15:02:11.629Z" title="发表于 2023-01-17 23:02:11">2023-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/15/JavaScriptDataType/" title="JavaScript数据类型浅析"><img src="/img/articleImg/JavaScript.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript数据类型浅析"/></a><div class="content"><a class="title" href="/2023/01/15/JavaScriptDataType/" title="JavaScript数据类型浅析">JavaScript数据类型浅析</a><time datetime="2023-01-15T14:18:55.206Z" title="发表于 2023-01-15 22:18:55">2023-01-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/articleImg/nodejs.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By LonelySnowman</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"><img class="icp-icon" src="/img/icp.png"><span>备案号：晋ICP备2022007549号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'QD7nKA4PSZSoJrPudMkKmtve-gzGzoHsz',
+      appKey: '3aDTZtCPQyXqf6ssoVKZS780',
+      avatar: 'monsterid',
+      serverURLs: 'https://qd7nka4p.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
