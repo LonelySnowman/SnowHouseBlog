@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>雪人的小屋 - 无 限 进 步 ！</title><meta name="author" content="LonelySnowman"><meta name="copyright" content="LonelySnowman"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="希望我的分享能帮助到大家">
+<meta property="og:type" content="website">
+<meta property="og:title" content="雪人的小屋">
+<meta property="og:url" content="https://snowhouse.space/index.html">
+<meta property="og:site_name" content="雪人的小屋">
+<meta property="og:description" content="希望我的分享能帮助到大家">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowhouse.space/img/Head.jpg">
+<meta property="article:author" content="LonelySnowman">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowhouse.space/img/Head.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://snowhouse.space/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '雪人的小屋',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-21 19:38:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/Head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">雪人的小屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">雪人的小屋</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://blog.csdn.net/lonelysnowman" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a><a class="social-icon" href="https://juejin.cn/user/550219962923015" target="_blank" title="掘金"><i class="iconfont icon-juejin"></i></a><a class="social-icon" href="https://github.com/LonelySnowman" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/05/leetcode/QuicklyMOD/" title="【算法日记】快速幂：关于我知道答案却做不出来这档事"><img class="post_bg" src="/img/randomCover/5.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法日记】快速幂：关于我知道答案却做不出来这档事"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/05/leetcode/QuicklyMOD/" title="【算法日记】快速幂：关于我知道答案却做不出来这档事">【算法日记】快速幂：关于我知道答案却做不出来这档事</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-05T15:54:56.787Z" title="发表于 2023-02-05 23:54:56">2023-02-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/02/05/leetcode/QuicklyMOD/#post-comment"><span class="valine-comment-count" data-xid="/2023/02/05/leetcode/QuicklyMOD/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">【算法日记】快速幂：关于我知道答案却做不出来这档事
+⭐LeetCode第330场周赛，直接卡在了第二题😭，掉大分，学到一手快速幂。
+⭐本文包含以下内容：快速幂，快速幂取余。
+⭐参考教程：
+
+2550. 猴子碰撞的方法数 - 力扣（Leetcode）
+50. Pow(x, n) - 力扣（Leetcode）
+50. Pow(x, n) - 力扣（Leetcode）
+
+
+
+Math.pow(x, n) 这个函数大家应该并不陌生，他就是用来计算 x^n^ 的函数，那么他是怎么实现的呢？
+快速幂的讲解推荐大家去看一个视频：50. Pow(x, n) - 力扣（Leetcode）
+下面给出代码实现，使用语言：TypeScript
+
+暴力计算1234567891011// 直接将x连乘n次即可// 时间复杂度 O(n)function myPow(x: number, n: number): number &#123;    let m: number = 1    // 遇到负数需要连乘 1/x    if(n&lt;0) x = 1/x    for(let i=0;i&lt;Math.ab ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"><img class="post_bg" src="/img/articleImg/nodejs.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-29T15:34:18.867Z" title="发表于 2023-01-29 23:34:18">2023-01-29</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/NodeJS/">NodeJS</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/29/NodeJS-01/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/29/NodeJS-01/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇
+⛄最近要写一些npm命令发现文件读写和路径API忘记了，索性直接复习了一遍NodeJS，边学边忘真的痛苦。
+⛄本文包含以下内容：对NodeJS的基础介绍，NodeJS的内置包的简单介绍，CommonJS模块化介绍，npm包下载与发布介绍。
+⭐注：本文是对黑马程序员Node.js全套入门教程的学习笔记记录，加入了一些自己的练习改动与思考。
+⭐推荐大家去看原视频：黑马程序员Node.js全套入门教程
+
+初识NodeJs思考与认识JS为什么可以在浏览器中被执行12345====浏览器====待执行的JS代码	↓JavaScript解析引擎====浏览器====
+
+浏览器中含有JavaScript解析引擎负责解析JS代码
+
+不同的浏览器使用不同的JavaScript解析引擎：
+Chrome &#x3D;&gt; V8
+Firefox &#x3D;&gt; OdinMonkey（奥丁猴）
+Safri &#x3D;&gt; JSCore
+IE浏览器 &#x3D;&gt; Chakra（查克拉）
+等…
+
+
+
+Chrome浏览器的V8解析引 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜"><img class="post_bg" src="/img/randomCover/3.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【雪人日记】2023年的除夕夜"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜">【雪人日记】2023年的除夕夜</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-21T17:15:41.798Z" title="发表于 2023-01-22 01:15:41">2023-01-22</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9B%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">雪人日记</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/22/diary/2023-1-22/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/22/diary/2023-1-22/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">
+  470d40a13319dd5202c7e8667eadc5c9dff3ccb84d4bcff22c717d465e98526a3aef0124637f4316ef35591b77e4dddf653ce7f9bcbd21e6e3ca8f83ef35cd6dde4b79bb7240ad92d5ab011b654ecfc2a9199e29312edeb917b0519ed5bfd60e2494aec28fe0a49f31e457d693e4824ff8723adf28ed2c2d8daab0c3cde26088e88078a34a4218348ff11e0e221015793f66ab6cf7e399afa8482a2068dac02495f4bff7b566c5d7707c552b5abb5e0f67bde5b93d82857a9be9055fa730c37f368aea1c2eb4d34ee5151013a31ceacaf03fc12bd149f5be046c39f8170990406f9f84eab1f1b2a833f903922409b9e1d743ee144994255c9 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"><img class="post_bg" src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇">【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-18T04:23:53.149Z" title="发表于 2023-01-18 12:23:53">2023-01-18</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/webpack/">webpack</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/18/WebPack5-02/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/18/WebPack5-02/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">WebPack5高级篇
+⛄继续学习WebPack5的高级篇。
+⛄这一篇主要讲的是WebPack5打包优化的思路，全是配置项，无技术含量，主要是思路的学习。
+⭐注：本文是对尚硅谷 Web 前端之 Webpack5 教程的学习笔记记录，加入了一些自己的练习改动与思考。
+⭐推荐大家去看原视频：尚硅谷Webpack5入门到原理（面试开发一条龙）_哔哩哔哩_bilibili
+
+我的总结
+下面都是一些配置项，在这里大概描述一下优化的思路
+
+开发者体验优化
+SourceMap：打包后报错可映射源码报错位置
+
+打包加速
+HotModuleReplacement：热模块替换
+OneOf：正则匹配优化
+Include&#x2F;Exclude：匹配需要打包的文件，对不需要的进行过滤
+Cache：缓存优化，对Eslint检查与Babel编译结果进行缓存
+Thread：多进程打包
+
+压缩代码体积
+TreeShaking：只打包所需库的被引用内容，而不是打包整个库
+Babel：有优化Babel体积的插件
+ImageMinimizer：打包图片压缩
+
+兼容性
+Core-js：babel的补丁，可以将asyc函数， ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"><img class="post_bg" src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇">【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-17T15:02:11.629Z" title="发表于 2023-01-17 23:02:11">2023-01-17</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/webpack/">webpack</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/17/WebPack5-01/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/17/WebPack5-01/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">WebPack5入门到原理
+⛄最近报名了字节跳动的前端青训营，大作业是要做一个组件库项目。
+⛄当我自信的打开IDE准备大展身手的时候发现一点思路都没有，网上搜罗了很多教程后发现自己对工程化的知识了解尚浅。
+⛄于是就发现了谷谷的这套教程，真的讲的很好，学完Webpack就可以去搭建一个组件库脚手架了。
+⭐注：本文是对尚硅谷 Web 前端之 Webpack5 教程的学习笔记记录，加入了一些自己的练习改动与思考。
+⭐推荐大家去看原视频：尚硅谷Webpack5入门到原理（面试开发一条龙）_哔哩哔哩_bilibili
+
+前言为什么需要打包工具？
+开发时，我们会使用框架(React、Vue)，ES6模块化语法，Less&#x2F;Sass等css 预处理器等语法进行开发。
+这样的代码要想在浏览器运行必须经过编译成浏览器能识别的JS、Css 等语法，才能运行。
+所以我们需要打包工具帮我们做完这些事。
+除此之外，打包工具还能压缩代码、做兼容性处理、提升代码性能等。
+
+有哪些打包工具？
+Grunt
+Gulp
+Parcel
+Webpack
+Rollup
+vite
+…
+
+基本使用
+webpack是一个静态资 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/15/JavaScriptDataType/" title="JavaScript数据类型浅析"><img class="post_bg" src="/img/articleImg/JavaScript.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript数据类型浅析"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/15/JavaScriptDataType/" title="JavaScript数据类型浅析">JavaScript数据类型浅析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-15T14:18:55.206Z" title="发表于 2023-01-15 22:18:55">2023-01-15</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/15/JavaScriptDataType/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/15/JavaScriptDataType/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">JavaScript数据类型浅析
+最近在复习JS的基础知识，发现自己对BigInt与Number的理解不是很深刻，对NaN的理解也不到位，于是打算写一篇文章详细讲解一下。
+参考文章：
+
+Javascript 的数据类型详解 - 掘金 (juejin.cn)
+JavaScript基础数据类型 - 掘金 (juejin.cn)
+JavaScript 数据类型 | 菜鸟教程 (runoob.com)
+ECMAScript 6入门 (ruanyifeng.com)
+理解构造函数与原型对象 - 掘金 (juejin.cn)
+
+⭐Tips：学习本文，你将对JavaScript的八大数据类型有一个广泛的认识，适合小白观看或复习查看，不适合深入理解。
+
+
+JS的数据类型分两种
+基本数据类型：Number，String，Boolean，Null，Undefined，Symbol（ES6新增），BigInt（ES11新增）
+引用数据类型：Object（普通Object，Function，Date，Math，Array等）
+
+
+
+基本数据类型特性
+
+含有对应的原始数值的包装对象（Number，String等 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/08/CookieCORS/" title="【跨域】一篇文章彻底解决跨域设置cookie问题！"><img class="post_bg" src="/img/randomCover/9.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【跨域】一篇文章彻底解决跨域设置cookie问题！"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/08/CookieCORS/" title="【跨域】一篇文章彻底解决跨域设置cookie问题！">【跨域】一篇文章彻底解决跨域设置cookie问题！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-08T15:41:36.946Z" title="发表于 2023-01-08 23:41:36">2023-01-08</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Cookie/">Cookie</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E8%B7%A8%E5%9F%9F/">跨域</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Vue/">Vue</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Django/">Django</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2023/01/08/CookieCORS/#post-comment"><span class="valine-comment-count" data-xid="/2023/01/08/CookieCORS/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">一篇文章彻底解决跨域设置cookie问题！
+大家好我是雪人~~⛄
+之前做项目的时候发现后端传过来的 SetCookie 不能正常在浏览器中使用。
+是因为谷歌浏览器新版本Chrome 80将Cookie的SameSite属性默认值由None变为Lax。
+接下来带大家解决该问题。
+
+原理讲解
+我们可以看到Cookie有以下属性
+
+
+
+Cookie属性
+名称：Cookie的name。
+值：Cookie的value。
+Domain： Cookie的域。如果设成xxx.com(一级域名)，那么子域名x.xxx.com(二级域名)，都可以使用xxx.com的Cookie。
+Path：Cookie的路径。如果设为&#x2F;，则同域名全部路径均可使用该Cookie。如果设为&#x2F;xxx&#x2F;，则只有路径为&#x2F;xxx&#x2F;可以使用该Cookie。
+Expires &#x2F; Max-Age：Cookie的超时时间。如果值为时间，则在到达指定时间后Cookie失效。如果值为Session(会话)，Cookie会同Session一起失效，当整个浏览器关闭的时候Cookie失效。 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/30/2022year/" title="软件工程专业大学生的一年半 | 2022年度总结"><img class="post_bg" src="/img/articleImg/2022year.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="软件工程专业大学生的一年半 | 2022年度总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/30/2022year/" title="软件工程专业大学生的一年半 | 2022年度总结">软件工程专业大学生的一年半 | 2022年度总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-30T15:44:54.933Z" title="发表于 2022-12-30 23:44:54">2022-12-30</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">年度总结</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2022/12/30/2022year/#post-comment"><span class="valine-comment-count" data-xid="/2022/12/30/2022year/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">软件工程专业大学生的一年半 | 2022年度总结
+⛄hi~~大家好，我是雪人，不知不觉马上就要2023年了，从今年开始，决定每一年都要写一篇年度总结，用于记录与回顾自己的学习和生活轨迹。
+
+学习内容(这一年半学了哪些技术)：
+
+语言基础：C语言基础，Python基础，Java基础，JavaScript基础，TypeScript基础
+数据分析：pandas，numpy，matplotlib（很久没碰这些了，已经忘光了）
+爬虫：requests（学的很基础，就会用个正则和XPath爬一些没有加密的信息）
+前端三件套：HTML，CSS，JS（pink老师带我入门🤩，阮一峰的ES6写的很棒）
+数据库：Mysql
+后端框架：Django（及工具库django-cors-headers，djangorestframework等）
+前端框架：Vue2，Vue3（及工具库axios，vuex，pinia，element-ui，eslint等）
+微信小程序：原生开发
+APP开发：uni-app（跨端开发）
+算法：数据结构（跟随《代码随想录》用TS刷leetcode 目前刷到了贪心算法）
+打包工具：We ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/15/ElementUIUploadFile/" title="【ElementUI】Vue+ElementUI多文件上传，一次请求上传多个文件！"><img class="post_bg" src="/img/randomCover/6.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【ElementUI】Vue+ElementUI多文件上传，一次请求上传多个文件！"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/15/ElementUIUploadFile/" title="【ElementUI】Vue+ElementUI多文件上传，一次请求上传多个文件！">【ElementUI】Vue+ElementUI多文件上传，一次请求上传多个文件！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-15T08:07:00.530Z" title="发表于 2022-12-15 16:07:00">2022-12-15</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/ElementUI/">ElementUI</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2022/12/15/ElementUIUploadFile/#post-comment"><span class="valine-comment-count" data-xid="/2022/12/15/ElementUIUploadFile/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">Element UI Upload
+⭐今天教大家使用ElementUI的自定义上传
+⭐请求一次上传多张图片
+
+
+最近写项目的时候需要一次上传多张图片，使用ElementUI Upload的时候发现
+如果是默认方案，上传多张图片并不是真正的一次上传多张，而是发送多次请求，一次请求携带一张图片
+接下来分享一下我的解决思路
+
+
+ElementUI版本：2.15.9
+Vue版本：2.7.10
+
+Html部分1234567891011121314151617&lt;!-- 需要携带以下参数 --&gt;&lt;!-- ref 用于获取组件触发API --&gt;&lt;!-- auto-upload 关闭自动上传 --&gt;&lt;!-- http-request 设置自定义上传的函数 --&gt;&lt;!-- on-change 图片列表改变时触发的函数 --&gt;&lt;!-- multiple 允许上传多个文件 --&gt;&lt;el-upload           ref=&quot;upload&quot;           :auto-upload=&quot;false ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/12/DRF/" title="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！"><img class="post_bg" src="/img/articleImg/Django.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/12/DRF/" title="【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！">【DRF】快速入门，使用DjangoRestFrameWork自动生成Restful风格的增删改查代码和接口文档！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-12T05:54:26.299Z" title="发表于 2022-12-12 13:54:26">2022-12-12</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Django/">Django</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/DjangoRestFrameWork/">DjangoRestFrameWork</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a href="/2022/12/12/DRF/#post-comment"><span class="valine-comment-count" data-xid="/2022/12/12/DRF/"><i class="fa-solid fa-spinner fa-spin"></i></span></a><span class="article-meta-label"> 条评论</span></span></div><div class="content">DRF快速入门
+⭐都快2023年了还有人自己写增删改查代码？！？我不允许还不会有人用DRF！
+⭐今天教大家使用 Django Rest FrameWork 自动生成Restful风格的增删改查代码和接口文档！
+⭐参考文章：首页 - Django REST 框架 (django-rest-framework.org)（官方文档）
+
+
+注意：
+Django Rest FrameWork 是在Django框架下使用
+以下内容需要先创建一个Django项目
+
+
+什么是Restful风格：RESTful API 一种流行的 API 设计风格
+
+安装依赖安装Rest FrameWork 需要满足以下条件：
+
+Python （3.6， 3.7， 3.8， 3.9， 3.10）
+Django （2.2， 3.0， 3.1， 3.2， 4.0， 4.1）
+
+123456# 安装Djangopip install django# 安装DRFpip install djangorestframework# 安装自动生成接口文档需要的依赖pip install coreapi
+
+设置
+以下内容在项目中 see ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/Head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LonelySnowman</div><div class="author-info__description">希望我的分享能帮助到大家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LonelySnowman"><i class="fab fa-github"></i><span>Follow My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://blog.csdn.net/lonelysnowman" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a><a class="social-icon" href="https://juejin.cn/user/550219962923015" target="_blank" title="掘金"><i class="iconfont icon-juejin"></i></a><a class="social-icon" href="https://github.com/LonelySnowman" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+canvas {
+  display: block;
+  margin: 0 auto;
+  cursor: move;
+}
+</style><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div style="display:flex;flex-direction:column;align-items:center;"><img src="/img/mao.gif" width="50" alt="mao"><strong><font color="#00dddd">大二萌新 热爱前端</font></strong><strong><font color="red">一起学习 共同进步</font></strong><strong><font color="grenn">Ctrl+D 收藏我吧</font></strong></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/05/leetcode/QuicklyMOD/" title="【算法日记】快速幂：关于我知道答案却做不出来这档事"><img src="/img/randomCover/5.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【算法日记】快速幂：关于我知道答案却做不出来这档事"/></a><div class="content"><a class="title" href="/2023/02/05/leetcode/QuicklyMOD/" title="【算法日记】快速幂：关于我知道答案却做不出来这档事">【算法日记】快速幂：关于我知道答案却做不出来这档事</a><time datetime="2023-02-05T15:54:56.787Z" title="发表于 2023-02-05 23:54:56">2023-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"><img src="/img/articleImg/nodejs.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇"/></a><div class="content"><a class="title" href="/2023/01/29/NodeJS-01/" title="【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇">【学习笔记】黑马程序员Node.js全套入门教程 | 基础篇</a><time datetime="2023-01-29T15:34:18.867Z" title="发表于 2023-01-29 23:34:18">2023-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜"><img src="/img/randomCover/3.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【雪人日记】2023年的除夕夜"/></a><div class="content"><a class="title" href="/2023/01/22/diary/2023-1-22/" title="【雪人日记】2023年的除夕夜">【雪人日记】2023年的除夕夜</a><time datetime="2023-01-21T17:15:41.798Z" title="发表于 2023-01-22 01:15:41">2023-01-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"><img src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇"/></a><div class="content"><a class="title" href="/2023/01/18/WebPack5-02/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇">【学习笔记】尚硅谷Webpack5入门到原理 | 高级篇</a><time datetime="2023-01-18T04:23:53.149Z" title="发表于 2023-01-18 12:23:53">2023-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"><img src="/img/articleImg/webpack5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇"/></a><div class="content"><a class="title" href="/2023/01/17/WebPack5-01/" title="【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇">【学习笔记】尚硅谷Webpack5入门到原理 | 基础篇</a><time datetime="2023-01-17T15:02:11.629Z" title="发表于 2023-01-17 23:02:11">2023-01-17</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">年度总结</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B0/"><span class="card-category-list-name">算法日记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9B%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/"><span class="card-category-list-name">雪人日记</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 1.15em; color: rgb(76, 103, 163)">年度总结</a><a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" style="font-size: 1.15em; color: rgb(140, 168, 33)">腾讯云</a><a href="/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" style="font-size: 1.15em; color: rgb(145, 123, 156)">对象存储</a><a href="/tags/PicGo/" style="font-size: 1.15em; color: rgb(73, 99, 43)">PicGo</a><a href="/tags/Typora/" style="font-size: 1.15em; color: rgb(81, 34, 119)">Typora</a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 1.15em; color: rgb(170, 106, 155)">图床</a><a href="/tags/Cookie/" style="font-size: 1.15em; color: rgb(130, 89, 71)">Cookie</a><a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 1.25em; color: rgb(159, 20, 144)">跨域</a><a href="/tags/Vue/" style="font-size: 1.45em; color: rgb(155, 193, 88)">Vue</a><a href="/tags/Django/" style="font-size: 1.35em; color: rgb(58, 200, 103)">Django</a><a href="/tags/DjangoRestFrameWork/" style="font-size: 1.15em; color: rgb(117, 52, 156)">DjangoRestFrameWork</a><a href="/tags/Nginx/" style="font-size: 1.25em; color: rgb(135, 176, 12)">Nginx</a><a href="/tags/uwsgi/" style="font-size: 1.15em; color: rgb(157, 56, 68)">uwsgi</a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.25em; color: rgb(85, 124, 41)">服务器</a><a href="/tags/ElementUI/" style="font-size: 1.15em; color: rgb(13, 88, 15)">ElementUI</a><a href="/tags/JavaScript/" style="font-size: 1.15em; color: rgb(192, 104, 197)">JavaScript</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 1.15em; color: rgb(92, 58, 18)">数据类型</a><a href="/tags/NodeJS/" style="font-size: 1.15em; color: rgb(36, 78, 131)">NodeJS</a><a href="/tags/Vue3/" style="font-size: 1.15em; color: rgb(32, 109, 88)">Vue3</a><a href="/tags/TypeScript/" style="font-size: 1.15em; color: rgb(170, 105, 198)">TypeScript</a><a href="/tags/Vite/" style="font-size: 1.15em; color: rgb(136, 1, 122)">Vite</a><a href="/tags/%E9%9B%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/" style="font-size: 1.15em; color: rgb(150, 153, 56)">雪人日记</a><a href="/tags/webpack/" style="font-size: 1.25em; color: rgb(190, 192, 85)">webpack</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.15em; color: rgb(90, 181, 151)">算法</a><a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 1.15em; color: rgb(105, 74, 135)">快速幂</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">18</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-09-28T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">55.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-02-21T11:38:21.704Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By LonelySnowman</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"><img class="icp-icon" src="/img/icp.png"><span>备案号：晋ICP备2022007549号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  function loadValine () {
+    function initValine () {
+      let initData = {
+        el: '#vcomment',
+        appId: 'QD7nKA4PSZSoJrPudMkKmtve-gzGzoHsz',
+        appKey: '3aDTZtCPQyXqf6ssoVKZS780',
+        serverURLs: 'https://qd7nka4p.lc-cn-n1-shared.com'
+      }
+      
+      const valine = new Valine(initData)
+    }
+
+    if (typeof Valine === 'function') initValine() 
+    else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+  }
+
+  window.pjax ? loadValine() : window.addEventListener('load', loadValine)
+})()</script><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#subtitle", {
+      strings: ["无 限 进 步 ！"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '无 限 进 步 ！'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    let defaultIcon = '?d=monsterid'
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (false) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+    const serverURL = 'https://qd7nka4p.lc-cn-n1-shared.com'
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'QD7nKA4PSZSoJrPudMkKmtve-gzGzoHsz',
+        "X-LC-Key": '3aDTZtCPQyXqf6ssoVKZS780',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': getIcon(e.QQAvatar, e.mail),
+            'content': changeContent(e.comment),
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.updatedAt,
+          }
+        })
+        saveToLocal.set('valine-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('valine-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
