@@ -201,13 +201,13 @@
       
         <tags>
             
-            <tag> Django </tag>
-            
             <tag> Cookie </tag>
             
             <tag> 跨域 </tag>
             
             <tag> Vue </tag>
+            
+            <tag> Django </tag>
             
         </tags>
       
@@ -284,9 +284,9 @@
       
         <tags>
             
-            <tag> DjangoRestFrameWork </tag>
-            
             <tag> Django </tag>
+            
+            <tag> DjangoRestFrameWork </tag>
             
         </tags>
       
@@ -311,9 +311,9 @@
       
         <tags>
             
-            <tag> Django </tag>
-            
             <tag> 跨域 </tag>
+            
+            <tag> Django </tag>
             
         </tags>
       
@@ -402,11 +402,11 @@
       
         <tags>
             
+            <tag> Vue </tag>
+            
             <tag> Nginx </tag>
             
             <tag> 服务器 </tag>
-            
-            <tag> Vue </tag>
             
         </tags>
       
