@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router | 雪人的小屋</title><meta name="author" content="LonelySnowman"><meta name="copyright" content="LonelySnowman"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router Hello大家好我是⛄，前一节我们讲解了脚手架的基础项目搭建。接下来教大家将Vue技术栈常用的工具进行封装，让我们项目的代码更易维护。  GitHub：LonelySnowman&#x2F;sv3-template 官方文档：SV3-Family | Vue3    前置知识：Vue全家桶，了解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router">
+<meta property="og:url" content="https://snowhouse.space/2023/03/27/sv3-template/2-encapsulateCode/index.html">
+<meta property="og:site_name" content="雪人的小屋">
+<meta property="og:description" content="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router Hello大家好我是⛄，前一节我们讲解了脚手架的基础项目搭建。接下来教大家将Vue技术栈常用的工具进行封装，让我们项目的代码更易维护。  GitHub：LonelySnowman&#x2F;sv3-template 官方文档：SV3-Family | Vue3    前置知识：Vue全家桶，了解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowhouse.space/img/articleImg/cli.jpeg">
+<meta property="article:published_time" content="2023-03-27T08:12:55.364Z">
+<meta property="article:modified_time" content="2023-03-27T08:17:21.369Z">
+<meta property="article:author" content="LonelySnowman">
+<meta property="article:tag" content="脚手架">
+<meta property="article:tag" content="axios">
+<meta property="article:tag" content="pinia">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowhouse.space/img/articleImg/cli.jpeg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://snowhouse.space/2023/03/27/sv3-template/2-encapsulateCode/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-27 16:17:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/Head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/articleImg/cli.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">雪人的小屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book blue"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link pink"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-message message-color"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart red"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-27T08:12:55.364Z" title="发表于 2023-03-27 16:12:55">2023-03-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-27T08:17:21.369Z" title="更新于 2023-03-27 16:17:21">2023-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">年度总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="【从零到一手撕脚手架-第二节】模块化封装-降低耦合度-封装-axios-pinia-router"><a href="#【从零到一手撕脚手架-第二节】模块化封装-降低耦合度-封装-axios-pinia-router" class="headerlink" title="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router"></a>【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router</h1><blockquote>
+<p>Hello大家好我是⛄，前一节我们讲解了脚手架的基础项目搭建。接下来教大家将Vue技术栈常用的工具进行封装，让我们项目的代码更易维护。</p>
+<ul>
+<li><strong>GitHub</strong>：<a target="_blank" rel="noopener" href="https://github.com/LonelySnowman/sv3-template">LonelySnowman&#x2F;sv3-template</a></li>
+<li><strong>官方文档</strong>：<a target="_blank" rel="noopener" href="https://sv3-docs.snowhouse.space/">SV3-Family | Vue3</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>前置知识：Vue全家桶，了解Vite或WebPack等构建工具，Node.js</li>
+<li>您将收获到：从零到一构建一个规范的 Vue3+TS+Vite 脚手架</li>
+</ul>
+<h2 id="封装axios"><a href="#封装axios" class="headerlink" title="封装axios"></a>封装axios</h2><h4 id="状态码提示"><a href="#状态码提示" class="headerlink" title="状态码提示"></a>状态码提示</h4><ul>
+<li>当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含 HTTP 状态码的信息头（server header）用以响应浏览器的请求。</li>
+<li>每个状态码都代表一种提示信息</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">分类</th>
+<th align="left">分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1**</td>
+<td align="left">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td align="left">2**</td>
+<td align="left">成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td align="left">3**</td>
+<td align="left">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td align="left">4**</td>
+<td align="left">客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td align="left">5**</td>
+<td align="left">服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<p>但是用户不一定了解每种状态码对应的提示信息，我们可以将状态码进行封装，将对应的中文含义返回给予用户提示。</p>
+<p>我们封装一个方法用于获取常见状态码对应的中文信息，将他放置在 <code>/src/utils/http/status.ts</code>:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入状态码获取对应提示信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getMessage = (<span class="attr">status</span>: <span class="built_in">number</span> | <span class="built_in">string</span>): <span class="function"><span class="params">string</span> =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">let</span> message = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">   <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">400</span>:</span><br><span class="line">         message = <span class="string">&#x27;请求错误(400)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">         message = <span class="string">&#x27;未授权，请重新登录(401)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">403</span>:</span><br><span class="line">         message = <span class="string">&#x27;拒绝访问(403)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">         message = <span class="string">&#x27;请求出错(404)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">408</span>:</span><br><span class="line">         message = <span class="string">&#x27;请求超时(408)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">         message = <span class="string">&#x27;服务器错误(500)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">501</span>:</span><br><span class="line">         message = <span class="string">&#x27;服务未实现(501)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">502</span>:</span><br><span class="line">         message = <span class="string">&#x27;网络错误(502)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">503</span>:</span><br><span class="line">         message = <span class="string">&#x27;服务不可用(503)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">504</span>:</span><br><span class="line">         message = <span class="string">&#x27;网络超时(504)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">505</span>:</span><br><span class="line">         message = <span class="string">&#x27;HTTP版本不受支持(505)&#x27;</span>;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="attr">default</span>:</span><br><span class="line">         message = <span class="string">`连接出错(<span class="subst">$&#123;status&#125;</span>)!`</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;message&#125;</span>，请检查网络或联系管理员！`</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在响应拦截器对响应码进行判断提示，如果不是成功响应发出提示给用户，这里直接使用ElementPlus的Message组件，大家可以根据习惯选择其他方式。</p>
+<p><strong>&#x2F;src&#x2F;utils&#x2F;http&#x2F;index.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getMessage &#125; <span class="keyword">from</span> <span class="string">&#x27;./status&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ElMessage</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// axios响应拦截</span></span><br><span class="line"><span class="comment">// 给予用户友好提示</span></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(</span><br><span class="line">   <span class="function">(<span class="params">response: AxiosResponse</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (response.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">         <span class="keyword">return</span> response;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">         <span class="attr">message</span>: <span class="title function_">getMessage</span>(response.<span class="property">status</span>),</span><br><span class="line">         <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> response;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="comment">// 请求失败</span></span><br><span class="line">   <span class="function">(<span class="params">error: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; response &#125; = error;</span><br><span class="line">      <span class="keyword">if</span> (response) &#123;</span><br><span class="line">         <span class="comment">// 请求已发出，但是不在2xx的范围</span></span><br><span class="line">         <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">            <span class="attr">message</span>: <span class="title function_">getMessage</span>(response.<span class="property">status</span>),</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(response.<span class="property">data</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">         <span class="attr">message</span>: <span class="string">&#x27;网络连接异常,请稍后再试!&#x27;</span>,</span><br><span class="line">         <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="接口管理"><a href="#接口管理" class="headerlink" title="接口管理"></a>接口管理</h4><ul>
+<li>在我们成功将axios进项目之后，总是在组件中直接单独引用axios再进行配置请求是十分不方便的，对于一个接口我们可能会有多个组件会用到。</li>
+</ul>
+<p><strong>接口一般会有一层最外围的规范</strong>，下面以一个最简单的为例：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">code</td>
+<td align="left">Number</td>
+<td align="left">结果码</td>
+<td align="left">成功&#x3D;1失败&#x3D;-1未登录&#x3D;401无权限&#x3D;403</td>
+</tr>
+<tr>
+<td align="left">message</td>
+<td align="left">String</td>
+<td align="left">显示信息</td>
+<td align="left">给予用户的提示信息</td>
+</tr>
+<tr>
+<td align="left">data</td>
+<td align="left">Object</td>
+<td align="left">数据</td>
+<td align="left">JSON 格式</td>
+</tr>
+</tbody></table>
+<p>所有接口均会按照这样的格式返回，那么我们可以使用TS设计一个类型，便于我们获得类型提示与校验。</p>
+<p>我们将他放置在 <code>/src/utils/http/types.ts</code> 下，并且可以传入一个泛型进行 data 数据格式的类型校验。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">BaseResponse</span>&lt;T = <span class="built_in">any</span>&gt; &#123;</span><br><span class="line">   <span class="attr">code</span>: <span class="built_in">number</span> | <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">message</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">data</span>: T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以对第一层响应进行特殊处理，如果code不为1则说明发生错误，直接给予用户提示。</p>
+<p><strong>&#x2F;src&#x2F;utils&#x2F;http&#x2F;index.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BaseResponse 为 res.data 的类型</span></span><br><span class="line"><span class="comment">// T 为 res.data.data 的类型 不同的接口会返回不同的 data 所以我们加一个泛型表示</span></span><br><span class="line"><span class="comment">// 此处相当于二次响应拦截</span></span><br><span class="line"><span class="comment">// 为响应数据进行定制化处理</span></span><br><span class="line"><span class="keyword">const</span> msgRequest = &lt;T = <span class="built_in">any</span>&gt;(<span class="attr">config</span>: <span class="title class_">AxiosRequestConfig</span>): <span class="title class_">Promise</span>&lt;T&gt; =&gt; &#123;</span><br><span class="line">   <span class="keyword">const</span> conf = config;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      service</span><br><span class="line">         .<span class="property">request</span>&lt;<span class="built_in">any</span>, <span class="title class_">AxiosResponse</span>&lt;<span class="title class_">BaseResponse</span>&gt;&gt;(conf)</span><br><span class="line">         .<span class="title function_">then</span>(<span class="function">(<span class="params">res: AxiosResponse&lt;BaseResponse&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = res.<span class="property">data</span>;</span><br><span class="line">            <span class="comment">// 如果data.code为错误代码返回message信息</span></span><br><span class="line">            <span class="keyword">if</span> (data.<span class="property">code</span> != <span class="number">1</span>) &#123;</span><br><span class="line">               <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">                  <span class="attr">message</span>: data.<span class="property">message</span>,</span><br><span class="line">                  <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">               &#125;);</span><br><span class="line">               <span class="title function_">reject</span>(data.<span class="property">message</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">                  <span class="attr">message</span>: data.<span class="property">message</span>,</span><br><span class="line">                  <span class="attr">type</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">               &#125;);</span><br><span class="line">               <span class="comment">// 此处返回data信息 也就是 api 中配置好的 Response类型</span></span><br><span class="line">               <span class="title function_">resolve</span>(data.<span class="property">data</span> <span class="keyword">as</span> T);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>请求方式有多种，POST、GET、PUT、DELETE等等，为了简化axios配置项的使用，我们可以对不同的请求方式进行封装。</p>
+<p>为了获得TS的类型校验与提示，我们传入两个泛型，一个代表请求参数类型，一个代表返回的data类型。</p>
+<p><strong>&#x2F;src&#x2F;utils&#x2F;http&#x2F;index.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在最后使用封装过的axios导出不同的请求方式</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> get&lt;T = <span class="built_in">any</span>, U = <span class="built_in">any</span>&gt;(</span><br><span class="line">   <span class="attr">config</span>: <span class="title class_">AxiosRequestConfig</span>,</span><br><span class="line">   <span class="attr">url</span>: <span class="built_in">string</span>,</span><br><span class="line">   parms?: U</span><br><span class="line">): <span class="title class_">Promise</span>&lt;T&gt; &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="title function_">msgRequest</span>(&#123; ...config, url, <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">params</span>: parms &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> post&lt;T = <span class="built_in">any</span>, U = <span class="built_in">any</span>&gt;(</span><br><span class="line">   <span class="attr">config</span>: <span class="title class_">AxiosRequestConfig</span>,</span><br><span class="line">   <span class="attr">url</span>: <span class="built_in">string</span>,</span><br><span class="line">   <span class="attr">data</span>: U</span><br><span class="line">): <span class="title class_">Promise</span>&lt;T&gt; &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="title function_">msgRequest</span>(&#123; ...config, url, <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: data &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="接口分类"><a href="#接口分类" class="headerlink" title="接口分类"></a>接口分类</h4><p>最基础的接口封装完毕了，接下来我们要使用这些接口。就需要将这些接口分类管理，负责用户信息管理的接口放在一起，负责权限管理的接口放在一起等等。</p>
+<p>我们在<code>/src/api</code>下建立不同的文件夹代表不同类型的API，在<code>index.ts</code>中编写接口配置，在<code>types.ts</code>中编写接口所需的请求参数类型以及响应类型。</p>
+<p><strong>&#x2F;src&#x2F;api&#x2F;user&#x2F;types.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 登录所需的参数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">LoginRequest</span> = &#123;</span><br><span class="line">   <span class="attr">username</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">password</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刷新登录信息需要的参数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> reLoginRequest = &#123;</span><br><span class="line">   <span class="attr">accessToken</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 登录后返回的响应信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">LoginResponse</span> = &#123;</span><br><span class="line">   <span class="attr">username</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">roles</span>: <span class="title class_">Array</span>&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line">   <span class="attr">accessToken</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以对此类型不同的接口进行封装，之后在组件中或者再次封装在Store中使用即可。</p>
+<p><strong>&#x2F;src&#x2F;api&#x2F;user&#x2F;index.ts</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; post &#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/http&#x27;</span>;</span><br><span class="line"><span class="comment">// 导入类型</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">LoginRequest</span>, <span class="title class_">LoginResponse</span>, reLoginRequest &#125; <span class="keyword">from</span> <span class="string">&#x27;@/api/user/types&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// post 请求直接传入一个 data 即可 url 我们直接在此处封装好</span></span><br><span class="line"><span class="comment">// 需要更改时也只需在此处更改</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">userLogin</span> = <span class="keyword">async</span> (<span class="params">data?: LoginRequest</span>) =&gt; &#123;</span><br><span class="line">   <span class="keyword">return</span> post&lt;<span class="title class_">LoginResponse</span>&gt;(&#123;&#125;, <span class="string">&#x27;/login&#x27;</span>, data);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">refreshUserInfo</span> = <span class="keyword">async</span> (<span class="params">data?: reLoginRequest</span>) =&gt; &#123;</span><br><span class="line">   <span class="keyword">return</span> post&lt;<span class="title class_">LoginResponse</span>&gt;(&#123;&#125;, <span class="string">&#x27;/getUserInfo&#x27;</span>, data);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用的时候我们可以直接在组件中引用，也可将其封装在store的action中，将相关的store与接口关联起来</p>
+</blockquote>
+<h2 id="封装router"><a href="#封装router" class="headerlink" title="封装router"></a>封装router</h2><p>router在使用过程中如果我们直接在一个文件的一个数组中配置，最后路由越来越多会导致不易管理，我们可以将一个页面的路由配置在一个数组中最后统一导入，这样就会方便很多。</p>
+<p>我们将不同页面的路由放置在<code>/src/router/modules/xxx.ts</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">RouteRecordRaw</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">   <span class="attr">path</span>: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">   <span class="attr">name</span>: <span class="string">&#x27;LoginPage&#x27;</span>,</span><br><span class="line">   <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/login/index.vue&#x27;</span>),</span><br><span class="line">   <span class="attr">meta</span>: &#123;</span><br><span class="line">      <span class="attr">role</span>: [<span class="string">&#x27;common&#x27;</span>, <span class="string">&#x27;admin&#x27;</span>],</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">children</span>: [],</span><br><span class="line">&#125; <span class="keyword">as</span> <span class="title class_">RouteRecordRaw</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在<code>/src/router/index.ts</code>导入这个路由</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHashHistory, <span class="title class_">RouteRecordRaw</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ElMessage</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import.meta.glob 为 vite 提供的特殊导入方式</span></span><br><span class="line"><span class="comment">// 它可以将模块中全部内容导入并返回一个Record对象</span></span><br><span class="line"><span class="comment">// 默认为懒加载模式 加入配置项 eager 取消懒加载</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">modules</span>: <span class="title class_">Record</span>&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt; = <span class="keyword">import</span>.<span class="property">meta</span>.<span class="title function_">glob</span>([<span class="string">&#x27;./modules/*.ts&#x27;</span>], &#123;</span><br><span class="line">   <span class="attr">eager</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> <span class="attr">routes</span>: <span class="title class_">Array</span>&lt;<span class="title class_">RouteRecordRaw</span>&gt; = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将路由全部导入数组</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(modules).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">   routes.<span class="title function_">push</span>(modules[key].<span class="property">default</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//导入生成的路由数据</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="title function_">createRouter</span>(&#123;</span><br><span class="line">   <span class="attr">history</span>: <span class="title function_">createWebHashHistory</span>(),</span><br><span class="line">   routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="keyword">async</span> (_to, _from, next) =&gt; &#123;</span><br><span class="line">	<span class="title function_">next</span>()</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">afterEach</span>(<span class="function">(<span class="params">_to</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="title class_">NProgress</span>.<span class="title function_">done</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以在module中直接创建路由，无需再次在<code>index.ts</code>中手动引入了。</p>
+<h2 id="封装store"><a href="#封装store" class="headerlink" title="封装store"></a>封装store</h2><p>同axios与touter一样，也拥有许多同类别的store数据，我们将他们放置在一个模块中便于调用，例如 user 模块专门用于保存与用户相关的信息与方法。</p>
+<p><strong>&#x2F;src&#x2F;store&#x2F;index.ts</strong></p>
+<ul>
+<li>这里用于导出需要使用的pinia并使用持久化插件</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createPinia &#125; <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> piniaPluginPersistedstate <span class="keyword">from</span> <span class="string">&#x27;pinia-plugin-persistedstate&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> pinia = <span class="title function_">createPinia</span>();</span><br><span class="line">pinia.<span class="title function_">use</span>(piniaPluginPersistedstate);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> pinia;</span><br></pre></td></tr></table></figure>
+
+<p><strong>&#x2F;src&#x2F;store&#x2F;xxx&#x2F;types.ts</strong></p>
+<ul>
+<li>以 user 为例</li>
+<li>这里用于定义stroe中state数据的类型</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">UserState</span> &#123;</span><br><span class="line">   <span class="attr">username</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">accessToken</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">refreshToken</span>: <span class="built_in">string</span>;</span><br><span class="line">   <span class="attr">roles</span>: <span class="title class_">Array</span>&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>&#x2F;src&#x2F;store&#x2F;xxx&#x2F;index.ts</strong></p>
+<ul>
+<li>定义store模块的主要内容，state、getter、actions</li>
+<li>state用于报错与用户相关的数据</li>
+<li>getter保存需要二次处理的数据</li>
+<li>action封装一些与user模块相关的方法，我们刚刚封装过的api如果需要直接改变用户数据直接在action中调用即可</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineStore &#125; <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">UserState</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./types&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> pinia <span class="keyword">from</span> <span class="string">&#x27;@/store&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; refreshUserInfo, userLogin &#125; <span class="keyword">from</span> <span class="string">&#x27;@/api/user&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;@/router&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> useUserStoreHook = <span class="title function_">defineStore</span>(</span><br><span class="line">   <span class="comment">// 唯一ID</span></span><br><span class="line">   <span class="string">&#x27;User&#x27;</span>,</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="attr">state</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">         <span class="attr">username</span>: <span class="string">&#x27;游客&#x27;</span>,</span><br><span class="line">         <span class="attr">accessToken</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">         <span class="attr">roles</span>: [<span class="string">&#x27;common&#x27;</span>],</span><br><span class="line">      &#125;),</span><br><span class="line">      <span class="attr">getters</span>: &#123;&#125;,</span><br><span class="line">      <span class="attr">actions</span>: &#123;</span><br><span class="line">         <span class="comment">// 用于更新store数据</span></span><br><span class="line">         <span class="comment">// UserState为定义好的state类型</span></span><br><span class="line">         <span class="title function_">updateInfo</span>(<span class="params">partial: Partial&lt;UserState&gt;</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.$patch(partial);</span><br><span class="line">         &#125;,</span><br><span class="line">         <span class="comment">// 用户登录</span></span><br><span class="line">         <span class="title function_">storeUserLogin</span>(<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">userLogin</span>(data).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">               <span class="variable language_">this</span>.<span class="property">username</span> = res.<span class="property">username</span>;</span><br><span class="line">               <span class="variable language_">this</span>.<span class="property">roles</span> = res.<span class="property">roles</span>;</span><br><span class="line">               <span class="variable language_">this</span>.<span class="property">accessToken</span> = res.<span class="property">accessToken</span>;</span><br><span class="line">               <span class="keyword">return</span> res;</span><br><span class="line">            &#125;);</span><br><span class="line">         &#125;,</span><br><span class="line">         <span class="comment">// 刷新用户信息</span></span><br><span class="line">         <span class="title function_">refreshUserInfo</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">username</span> == <span class="string">&#x27;游客&#x27;</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">accessToken</span> != <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">               <span class="title function_">refreshUserInfo</span>(&#123;</span><br><span class="line">                  <span class="attr">accessToken</span>: <span class="variable language_">this</span>.<span class="property">accessToken</span>,</span><br><span class="line">               &#125;)</span><br><span class="line">                  .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                     <span class="variable language_">this</span>.<span class="property">username</span> = res.<span class="property">username</span>;</span><br><span class="line">                     <span class="variable language_">this</span>.<span class="property">roles</span> = res.<span class="property">roles</span>;</span><br><span class="line">                     <span class="variable language_">this</span>.<span class="property">accessToken</span> = res.<span class="property">accessToken</span>;</span><br><span class="line">                  &#125;)</span><br><span class="line">                  .<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                     <span class="variable language_">this</span>.<span class="property">accessToken</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">                  &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 持久化保存 accessToken</span></span><br><span class="line">      <span class="attr">persist</span>: &#123;</span><br><span class="line">         <span class="attr">key</span>: <span class="string">&#x27;userInfo&#x27;</span>,</span><br><span class="line">         <span class="attr">storage</span>: sessionStorage,</span><br><span class="line">         <span class="attr">paths</span>: [<span class="string">&#x27;accessToken&#x27;</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">   &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出该Store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">useUserStore</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="title function_">useUserStoreHook</span>(pinia);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用的时候我们直接在需要使用store数据的组件中引用并使用即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script lang=&#x27;ts&#x27; setup&gt;</span><br><span class="line">import &#123; useUserStore &#125; from &#x27;@/store/modules/user&#x27;</span><br><span class="line">const userStore = useUserStore()</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>vue3技术栈的常用的基础封装就完成了，每个人的封装习惯各不相同，只要团队用起来方便快捷就好。</p>
+<p>一个基础的 Vue3+TypeScrpit+Vite 的项目就此构造完毕！</p>
+<p><strong>系列文章</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7207615983950987320">【从零到一手撕脚手架 | 第一节】配置基础项目结构 Vite + TypeScrpit + Vue3 初始化项目</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7209542304863649852">【从零到一手撕脚手架 | 第二节】模块化封装 降低耦合度 封装 axios pinia router</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7213310111623725117">【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7214759986802294844">【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟</a></li>
+</ul>
+<p><strong>参考学习项目</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/tobe-fe-dalao/fast-vue3">fast-vue3</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pure-admin/vue-pure-admin">vue-pure-admin</a></li>
+</ul>
+<blockquote>
+<p>如果有任何不正确的地方请指正，我会及时更改。</p>
+<p>更文不易，如果对你有帮助的话，请给我点个赞吧👍</p>
+<p>关注我，后续文章不迷路⛄</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://snowhouse.space">LonelySnowman</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://snowhouse.space/2023/03/27/sv3-template/2-encapsulateCode/">https://snowhouse.space/2023/03/27/sv3-template/2-encapsulateCode/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://snowhouse.space" target="_blank">雪人的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/">脚手架</a><a class="post-meta__tags" href="/tags/axios/">axios</a><a class="post-meta__tags" href="/tags/pinia/">pinia</a></div><div class="post_share"><div class="social-share" data-image="/img/articleImg/cli.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/27/sv3-template/3-standardCode/"><img class="prev-cover" src="/img/articleImg/cli.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/27/sv3-template/1-createBaseProject/"><img class="next-cover" src="/img/articleImg/cli.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/27/sv3-template/3-standardCode/" title="【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged"><img class="cover" src="/img/articleImg/cli.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-27</div><div class="title">【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged</div></div></a></div><div><a href="/2023/03/27/sv3-template/4-increaseEfficiency/" title="【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟"><img class="cover" src="/img/articleImg/cli.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-27</div><div class="title">【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/Head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LonelySnowman</div><div class="author-info__description">希望我的分享能帮助到大家</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">33</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LonelySnowman"><i class="fab fa-github"></i><span>Follow My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://blog.csdn.net/lonelysnowman" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a><a class="social-icon" href="https://juejin.cn/user/550219962923015" target="_blank" title="掘金"><i class="iconfont icon-juejin"></i></a><a class="social-icon" href="https://github.com/LonelySnowman" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+canvas {
+  display: block;
+  margin: 0 auto;
+  cursor: move;
+}
+</style><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div style="display:flex;flex-direction:column;align-items:center;"><img src="/img/mao.gif" width="50" alt="mao"><strong><font color="#00dddd">大二萌新 热爱前端</font></strong><strong><font color="red">一起学习 共同进步</font></strong><strong><font color="grenn">Ctrl+D 收藏我吧</font></strong></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E6%89%8B%E6%92%95%E8%84%9A%E6%89%8B%E6%9E%B6-%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%91%E6%A8%A1%E5%9D%97%E5%8C%96%E5%B0%81%E8%A3%85-%E9%99%8D%E4%BD%8E%E8%80%A6%E5%90%88%E5%BA%A6-%E5%B0%81%E8%A3%85-axios-pinia-router"><span class="toc-number">1.</span> <span class="toc-text">【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85axios"><span class="toc-number">1.1.</span> <span class="toc-text">封装axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81%E6%8F%90%E7%A4%BA"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">状态码提示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">接口管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">接口分类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85router"><span class="toc-number">1.2.</span> <span class="toc-text">封装router</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85store"><span class="toc-number">1.3.</span> <span class="toc-text">封装store</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.4.</span> <span class="toc-text">结语</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/27/sv3-template/4-increaseEfficiency/" title="【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟"><img src="/img/articleImg/cli.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟"/></a><div class="content"><a class="title" href="/2023/03/27/sv3-template/4-increaseEfficiency/" title="【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟">【从零到一手撕脚手架 | 第四节】加速开发效率 使用plop生成开发模板 使用mock进行数据模拟</a><time datetime="2023-03-27T08:12:55.380Z" title="发表于 2023-03-27 16:12:55">2023-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/27/sv3-template/3-standardCode/" title="【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged"><img src="/img/articleImg/cli.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged"/></a><div class="content"><a class="title" href="/2023/03/27/sv3-template/3-standardCode/" title="【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged">【从零到一手撕脚手架 | 第三节】项目集成CommitLInt+ESLint+Prettier+StyleLint+LintStaged</a><time datetime="2023-03-27T08:12:55.372Z" title="发表于 2023-03-27 16:12:55">2023-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/27/sv3-template/2-encapsulateCode/" title="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router"><img src="/img/articleImg/cli.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router"/></a><div class="content"><a class="title" href="/2023/03/27/sv3-template/2-encapsulateCode/" title="【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router">【从零到一手撕脚手架 | 第二节】模块化封装  降低耦合度 封装 axios pinia router</a><time datetime="2023-03-27T08:12:55.364Z" title="发表于 2023-03-27 16:12:55">2023-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/27/sv3-template/1-createBaseProject/" title="【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目"><img src="/img/articleImg/cli.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目"/></a><div class="content"><a class="title" href="/2023/03/27/sv3-template/1-createBaseProject/" title="【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目">【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目</a><time datetime="2023-03-27T08:12:55.356Z" title="发表于 2023-03-27 16:12:55">2023-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/17/diary/2023-3-17/" title="【雪人日记】大二下半学期已过四分之一"><img src="/img/randomCover/7.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【雪人日记】大二下半学期已过四分之一"/></a><div class="content"><a class="title" href="/2023/03/17/diary/2023-3-17/" title="【雪人日记】大二下半学期已过四分之一">【雪人日记】大二下半学期已过四分之一</a><time datetime="2023-03-17T14:19:38.400Z" title="发表于 2023-03-17 22:19:38">2023-03-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/articleImg/cli.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By LonelySnowman</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"><img class="icp-icon" src="/img/icp.png"><span>备案号：晋ICP备2022007549号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'QD7nKA4PSZSoJrPudMkKmtve-gzGzoHsz',
+      appKey: '3aDTZtCPQyXqf6ssoVKZS780',
+      avatar: 'monsterid',
+      serverURLs: 'https://qd7nka4p.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
