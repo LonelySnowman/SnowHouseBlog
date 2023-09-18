@@ -419,13 +419,13 @@
       
         <tags>
             
+            <tag> Django </tag>
+            
             <tag> Cookie </tag>
             
             <tag> 跨域 </tag>
             
             <tag> Vue </tag>
-            
-            <tag> Django </tag>
             
         </tags>
       
@@ -502,9 +502,9 @@
       
         <tags>
             
-            <tag> Django </tag>
-            
             <tag> DjangoRestFrameWork </tag>
+            
+            <tag> Django </tag>
             
         </tags>
       
@@ -529,9 +529,9 @@
       
         <tags>
             
-            <tag> 跨域 </tag>
-            
             <tag> Django </tag>
+            
+            <tag> 跨域 </tag>
             
         </tags>
       
