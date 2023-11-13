@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>【从零到一手撕脚手架 | 第一节】配置基础项目结构  Vite + TypeScrpit + Vue3 初始化项目</title>
+      <title>【从零到一手撕脚手架 | 第五节】自定义命令行下载cli工具</title>
       <link href="/2023/11/13/sv3-template/5-commandLineCli/"/>
       <url>/2023/11/13/sv3-template/5-commandLineCli/</url>
       
@@ -186,9 +186,9 @@
       
         <tags>
             
-            <tag> 脚手架 </tag>
-            
             <tag> axios </tag>
+            
+            <tag> 脚手架 </tag>
             
             <tag> pinia </tag>
             
@@ -215,9 +215,9 @@
       
         <tags>
             
-            <tag> vite </tag>
-            
             <tag> 脚手架 </tag>
+            
+            <tag> vite </tag>
             
         </tags>
       
@@ -448,13 +448,13 @@
       
         <tags>
             
+            <tag> Django </tag>
+            
             <tag> Cookie </tag>
             
             <tag> 跨域 </tag>
             
             <tag> Vue </tag>
-            
-            <tag> Django </tag>
             
         </tags>
       
@@ -531,9 +531,9 @@
       
         <tags>
             
-            <tag> Django </tag>
-            
             <tag> DjangoRestFrameWork </tag>
+            
+            <tag> Django </tag>
             
         </tags>
       
@@ -558,9 +558,9 @@
       
         <tags>
             
-            <tag> 跨域 </tag>
-            
             <tag> Django </tag>
+            
+            <tag> 跨域 </tag>
             
         </tags>
       
