@@ -253,9 +253,9 @@
       
         <tags>
             
-            <tag> mock </tag>
-            
             <tag> 脚手架 </tag>
+            
+            <tag> mock </tag>
             
             <tag> plop </tag>
             
@@ -340,9 +340,9 @@
       
         <tags>
             
-            <tag> 脚手架 </tag>
-            
             <tag> vite </tag>
+            
+            <tag> 脚手架 </tag>
             
         </tags>
       
